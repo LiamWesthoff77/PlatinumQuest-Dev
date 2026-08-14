@@ -393,6 +393,10 @@ function MPEndGameDlg::updateScores(%this) {
 	%show10 = false;
 	%players = $MP::ScorePlayers;
 
+	//Time-scored modes (e.g. race) show a time instead of a gem-based score,
+	//so the gem columns/icons don't mean anything here
+	%timeMode = (%players > 0) && (ScoreList.getEntry(0).scoreType == $ScoreType::Time);
+
 	if (!$MP::TeamMode) {
 		for (%j = 0; %j < %players; %j ++) {
 			%gems   = ScoreList.getEntry(%j).gems;
@@ -435,6 +439,13 @@ function MPEndGameDlg::updateScores(%this) {
 		MPEndGameBlueGem.setVisible(true);
 		MPMMWHitsGiven.setVisible(false);
 		MPMMWHitsTaken.setVisible(false);
+	}
+
+	if (%timeMode) {
+		MPEndGameRedGem.setVisible(false);
+		MPEndGameYellowGem.setVisible(false);
+		MPEndGameBlueGem.setVisible(false);
+		MPEndGamePlatinumGem.setVisible(false);
 	}
 
 	if ($MP::TeamMode) {
@@ -713,7 +724,8 @@ function MPEndGameDlg::updateScores(%this) {
 				else
 					%changeLabel = "0";
 
-				%scoreText.setText(%font TAB clipPx($DefaultFont, 28, LBResolveName(%player, true), 230, true) TAB %score TAB formatLevel(%rating) TAB %changeLabel);
+				%displayScore = %timeMode ? formatTime(%score) : %score;
+		%scoreText.setText(%font TAB clipPx($DefaultFont, 28, LBResolveName(%player, true), 230, true) TAB %displayScore TAB formatLevel(%rating) TAB %changeLabel);
 				%scoreTextR.setText(%font @ "<just:center>" @ %gems1);
 				%scoreTextY.setText(%font @ "<just:center>" @ %gems2);
 				%scoreTextB.setText(%font @ "<just:center>" @ %gems5);
@@ -758,21 +770,29 @@ function MPEndGameDlg::updateScores(%this) {
 		%players = $MP::ScorePlayers;
 		%rowIdx = 0;
 
-		// Sort it!
+		// Sort it! (%timeMode ranks lowest-first, everything else highest-first)
 		%used = Array(MPEndGameUsedPlayersArray);
 		for (%i = 0; %i < %players; %i ++) {
-			%bestScore = -9999;
+			%bestScore = %timeMode ? 999999999 : -9999;
 			%bestIdx = -1;
 			for (%j = 0; %j < %players; %j ++) {
 				%player = ScoreList.getEntry(%j).name;
 				%score  = ScoreList.getEntry(%j).score;
 				if (%used.containsEntry(%player))
 					continue;
-				if (%score > %bestScore) {
-					%bestScore = %score;
-					%bestIdx = %j;
-				} else
-					continue;
+				if (%timeMode) {
+					if (%score < %bestScore) {
+						%bestScore = %score;
+						%bestIdx = %j;
+					} else
+						continue;
+				} else {
+					if (%score > %bestScore) {
+						%bestScore = %score;
+						%bestIdx = %j;
+					} else
+						continue;
+				}
 			}
 
 			%player = ScoreList.getEntry(%bestIdx).name;
@@ -878,6 +898,13 @@ function MPEndGameDlg::updateScores(%this) {
 
 			%scoreTextP.setVisible(%show10);
 
+			if (%timeMode) {
+				%scoreTextR.setVisible(false);
+				%scoreTextY.setVisible(false);
+				%scoreTextB.setVisible(false);
+				%scoreTextP.setVisible(false);
+			}
+
 			// Total row counter
 			%rowIdx ++;
 
@@ -911,12 +938,16 @@ function MPEndGameDlg::updateScores(%this) {
 			      || ($Server::_Dedicated && isObject(ScoreList.player[1])); //Hosting dedicated, hack but should work
 			%scoreIdx = (%vs ? 0 : 1);
 
-			if (%score < MissionInfo.score[%scoreIdx] && MissionInfo.score[%scoreIdx])
+			//The gem-score tier thresholds don't mean anything for a time value
+			if (%timeMode) {
+				%score = formatTime(%score);
+			} else if (%score < MissionInfo.score[%scoreIdx] && MissionInfo.score[%scoreIdx]) {
 				%score = "<spush>" @ %scoreColor @ "<color:FF6666>" @ %score @ "<spop>";
-			else if (%score >= MissionInfo.ultimateScore[%scoreIdx] && MissionInfo.ultimateScore[%scoreIdx])
+			} else if (%score >= MissionInfo.ultimateScore[%scoreIdx] && MissionInfo.ultimateScore[%scoreIdx]) {
 				%score = "<spush>" @ %scoreColor @ "<color:" @ %ultimateColor @ ">" @ %score @ "<spop>";
-			else if (%score >= MissionInfo.platinumScore[%scoreIdx] && MissionInfo.platinumScore[%scoreIdx])
+			} else if (%score >= MissionInfo.platinumScore[%scoreIdx] && MissionInfo.platinumScore[%scoreIdx]) {
 				%score = "<spush>" @ %scoreColor @ "<color:" @ %platinumColor @ ">" @ %score @ "<spop>";
+			}
 
 			%gems1  = "<spush><color:FF0000>" @ %scoreColor @ %gems1  @ "<spop>";
 			%gems2  = "<spush><color:FFFF00>" @ %scoreColor @ %gems2  @ "<spop>";
@@ -968,7 +999,8 @@ function MPEndGameDlg::updateScores(%this) {
 	%itemHeight = 44;
 	MPEndGameListContainer.setHeight(%itemHeight * MPEndGameListContainer.getCount());
 
-	MPEndGameHeader.setText("<bold:30><color:FFFFFF><tab:40,280,510,590,650> \tName\tScore\tMarble\tLevel\tPoints");
+	%scoreLabel = %timeMode ? "Final Time" : "Score";
+	MPEndGameHeader.setText("<bold:30><color:FFFFFF><tab:40,280,510,590,650> \tName\t" @ %scoreLabel @ "\tMarble\tLevel\tPoints");
 
 	%text = "<bold:48><color:FFFFFF><just:center><shadowcolor:0000007f><shadow:1:1>";
 	%score = PlayGui.gemCount;

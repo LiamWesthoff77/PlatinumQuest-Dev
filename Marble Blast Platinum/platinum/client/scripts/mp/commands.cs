@@ -458,6 +458,8 @@ function clientCmdServerSetting(%setting, %value) {
 		$Server::ForceSpectators = %value;
 	case "MaxPlayers":
 		$Server::MaxPlayers = %value;
+	case "RaceModeCoop":
+		$MPPref::Server::RaceModeCoop = %value;
 	}
 }
 
@@ -466,6 +468,7 @@ function clientCmdServerSettingsList() {
 }
 
 function clientCmdServerSettingsListItem(%id, %name, %value, %type, %min, %max) {
+	echo("Client: received server setting " @ %id @ " (" @ %name @ ") value=" @ %value @ " type=" @ %type);
 	MPDedicatedServerDlg.addSetting(%id, %name, %value, %type, %min, %max);
 
 	$MP::Client::ServerSetting[%id] = %value;

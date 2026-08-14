@@ -241,7 +241,7 @@ function serverCmdFileCRC(%client, %file, %crc) {
 
 // Make this "true" in the release build. We need this false for
 // dedicated server though.
-$CRC_NOPE = (!$Server::Dedicated);
+$CRC_NOPE = false;
 $LB::ValidateSessions = true;
 
 function serverCmdFinishCRC(%client, %cFiles) {

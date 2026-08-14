@@ -23,7 +23,12 @@
 //-----------------------------------------------------------------------------
 
 function Mode_race::onLoad(%this) {
+	%this.registerCallback("onMissionLoaded");
+	%this.registerCallback("onMissionReset");
+	%this.registerCallback("onClientLeaveGame");
+	%this.registerCallback("onEnterPad");
 	%this.registerCallback("shouldPickupGem");
+	%this.registerCallback("shouldPickupTimeItem");
 	%this.registerCallback("shouldPickupPowerUp");
 	%this.registerCallback("shouldDisablePowerup");
 	%this.registerCallback("shouldUseClientPowerups");
@@ -34,8 +39,15 @@ function Mode_race::onLoad(%this) {
 	%this.registerCallback("onFoundGem");
 	%this.registerCallback("shouldTotalGemCount");
 	%this.registerCallback("updateWinner");
+	%this.registerCallback("getScoreType");
+	%this.registerCallback("getFinalScore");
 	%this.registerCallback("getQuickRespawnTimeout");
+	%this.registerCallback("shouldUseIndividualClocks");
+	%this.registerCallback("onFrameAdvance");
 	echo("[Mode" SPC %this.name @ "]: Loaded!");
+}
+function Mode_race::shouldUseIndividualClocks(%this) {
+	return true;
 }
 function Mode_race::shouldRespawnGems(%this, %object) {
 	return true;
@@ -48,6 +60,12 @@ function Mode_race::shouldResetTime(%this, %object) {
 }
 function Mode_race::shouldPickupGem(%this, %object) {
 	commandToClient(%object.user.client, 'GemPickup', %object.obj.getSyncId());
+	return false;
+}
+function Mode_race::shouldPickupTimeItem(%this, %object) {
+	//Same idea as gems: leave the item live for everyone else, just tell
+	//this one client to hide it locally
+	commandToClient(%object.user.client, 'TimeItemPickup', %object.obj.getSyncId());
 	return false;
 }
 function Mode_race::shouldDisablePowerup(%this, %object) {
@@ -92,35 +110,147 @@ function Mode_race::onFoundGem(%this, %object) {
 function Mode_race::shouldTotalGemCount(%this) {
 	return false;
 }
-function Mode_race::updateWinner(%this, %winners) {
-	//In race mode, whoever has the most gems or finishes first wins
-	if ($Game::GemCount == 0) {
-		%winner = $Game::FinishClient;
-		%winners.addEntry(%winner);
-	} else {
-		%winner = ClientGroup.getObject(0);
-		%count = ClientGroup.getCount();
+function Mode_race::onMissionLoaded(%this) {
+	%count = ClientGroup.getCount();
+	for (%i = 0; %i < %count; %i ++) {
+		%client = ClientGroup.getObject(%i);
+		%client.resetRaceStats();
+	}
+}
+function Mode_race::onMissionReset(%this) {
+	%count = ClientGroup.getCount();
+	for (%i = 0; %i < %count; %i ++) {
+		%client = ClientGroup.getObject(%i);
+		%client.resetRaceStats();
+	}
+}
+function Mode_race::onClientLeaveGame(%this, %object) {
+	%count = ClientGroup.getCount();
+	if (%count <= 1) {
+		%winner = %this.getRaceWinner();
+		if (%winner !$= "")
+			$Game::FinishClient = %winner;
+		else if (%count == 1)
+			$Game::FinishClient = ClientGroup.getObject(0);
+		endGameSetup();
+	}
+}
+function Mode_race::onEnterPad(%this, %object) {
+	%client = %object.client;
+	if (%client.raceFinished)
+		return true;
 
-		//Who has the most gems?
-		for (%i = 1; %i < %count; %i ++) {
-			%client = ClientGroup.getObject(%i);
-			if (%client.gemCount > %winner.gemCount)
-				%winner = %client;
-		}
-		%winners.addEntry(%winner);
-		//Check for other winners
-		for (%i = 0; %i < %count; %i ++) {
-			%client = ClientGroup.getObject(%i);
-			if (%winner == %client)
-				continue;
-			if (%client.gemCount == %winner.gemCount)
-				%winners.addEntry(%client);
+	if (!%client.canFinish()) {
+		%client.playPitchedSound("missinggems");
+		%message = %client.getFinishMessage();
+		if (%message !$= "")
+			messageClient(%client, 'MsgMissingGems', %message);
+		return true;
+	}
+
+	%client.raceFinished = true;
+	%client.raceFinishTime = sub64_int(%client.clockTime, %client.raceStartTime);
+	%client.player.setMode(Victory);
+	serverCmdSetSpectate(%client, true);
+	if (%client.spectating)
+		%client.setSpectating(true);
+
+	serverSendChat(%client.getDisplayName() SPC "finished in" SPC formatTime(%client.raceFinishTime) @ "!");
+
+	%this.checkRaceShouldEnd();
+
+	return true;
+}
+// Individual clocks mean a still-racing player can be sitting on a better
+// (lower) time than someone who already finished, thanks to time travels.
+// So once only one player is left racing, don't end the match the instant
+// they'd otherwise be the last one - keep it going until their live clock
+// passes the worst finish time already on the board, since until then they
+// could still improve on SOME position, not just take the win. Checked both
+// right after any finish (onEnterPad) and every frame (onFrameAdvance),
+// since the last player crossing that time threshold isn't itself an event
+// - it just happens as their clock ticks up.
+function Mode_race::onFrameAdvance(%this, %delta) {
+	if ($Game::Finished)
+		return;
+	%this.checkRaceShouldEnd();
+}
+function Mode_race::checkRaceShouldEnd(%this) {
+	if ($Game::Finished)
+		return;
+
+	%count = ClientGroup.getCount();
+	if (%count == 0)
+		return;
+
+	%finished = 0;
+	%worstTime = -1;
+	%remaining = "";
+	for (%i = 0; %i < %count; %i ++) {
+		%client = ClientGroup.getObject(%i);
+		if (%client.raceFinished) {
+			%finished ++;
+			if (%client.raceFinishTime > %worstTime)
+				%worstTime = %client.raceFinishTime;
+		} else {
+			%remaining = %client;
 		}
 	}
+
+	if (%finished >= %count) {
+		//Everyone's done
+		$Game::FinishClient = %this.getRaceWinner();
+		endGameSetup();
+	} else if (%finished > 0 && %finished == (%count - 1) && isObject(%remaining) && %remaining.clockTime > %worstTime) {
+		//One player left, and their live time has passed even the worst
+		//finish time already on the board - there's no position left for
+		//them to improve on, so it's safe to end now instead of making
+		//everyone wait for them to finish
+		$Game::FinishClient = %this.getRaceWinner();
+		endGameSetup();
+	}
+}
+function Mode_race::getRaceWinner(%this) {
+	%winner = "";
+	%bestTime = 999999999;
+	%count = ClientGroup.getCount();
+	for (%i = 0; %i < %count; %i ++) {
+		%client = ClientGroup.getObject(%i);
+		if (!%client.raceFinished)
+			continue;
+		if (%client.raceFinishTime < %bestTime) {
+			%winner = %client;
+			%bestTime = %client.raceFinishTime;
+		}
+	}
+	return %winner;
+}
+function Mode_race::updateWinner(%this, %winners) {
+	%winner = %this.getRaceWinner();
+	if (%winner !$= "") {
+		%winners.addEntry(%winner);
+	}
+}
+function Mode_race::getScoreType(%this) {
+	return $ScoreType::Time;
+}
+function Mode_race::getFinalScore(%this, %object) {
+	if (%object.client.raceFinishTime >= 0)
+		return $ScoreType::Time TAB %object.client.raceFinishTime;
+	return $ScoreType::Time TAB %object.client.clockTime;
 }
 function Mode_race::getQuickRespawnTimeout(%this, %object) {
 	//Allow them to respawn instantly
 	return 0;
+}
+function GameConnection::resetRaceStats(%this) {
+	%this.raceFinished = false;
+	%this.raceFinishTime = -1;
+	%this.racePlace = 0;
+	%this.clockTime = 0;
+	%this.bonusTime = 0;
+	%this.totalBonus = 0;
+	%this.raceStartTime = %this.clockTime;
 }
 
 

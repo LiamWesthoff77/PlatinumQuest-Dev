@@ -163,6 +163,7 @@ function MPinitLoops() {
 	MPUpdateGhostCollision();
 	serverBlastUpdate();
 	MPSyncClocks();
+	MPScoreLoop();
 	// We want this to be called!
 	schedule(1000, 0, MPUpdateGhostCollision);
 }
@@ -675,6 +676,13 @@ function GameConnection::stateEnd(%this) {
 //-----------------------------------------------------------------------------
 
 function GameConnection::incBonusTime(%this,%dt) {
+	if (shouldUseIndividualClocks()) {
+		//Only this client's own clock is affected; no global broadcast
+		%this.bonusTime += %dt;
+		%this.syncClock();
+		return;
+	}
+
 	Time::addBonusTime(%dt);
 
 	if ($Server::ServerType $= "MultiPlayer") {
@@ -848,7 +856,10 @@ function GameConnection::sendEndGameScores(%this) {
 		_delete = true;
 	});
 
-	commandToClient(%this, 'EndGameSetup', %score, $Time::ElapsedTime, $Time::TotalBonus, $Game::FinishClient.index);
+	//Each client's own bonus total under individual clocks; the shared one otherwise
+	%bonus = shouldUseIndividualClocks() ? %this.totalBonus : $Time::TotalBonus;
+
+	commandToClient(%this, 'EndGameSetup', %score, $Time::ElapsedTime, %bonus, $Game::FinishClient.index);
 }
 
 function GameConnection::resetStats(%this) {

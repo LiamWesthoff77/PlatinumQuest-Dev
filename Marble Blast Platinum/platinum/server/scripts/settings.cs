@@ -136,6 +136,7 @@ function serverSetSetting(%setting, %value) {
 
 function GameConnection::sendSettingsList(%this) {
 	commandToClient(%this, 'ServerSettingsList');
+	echo("Server: sending settings list to " @ %this.getAddress() @ " (", $MP::Server::Settings, " total)");
 	for (%i = 0; %i < $MP::Server::Settings; %i ++) {
 		//Set the fields into a list so we can read them
 		%id       = $MP::Server::Setting[%i, "id"];
@@ -151,6 +152,7 @@ function GameConnection::sendSettingsList(%this) {
 			continue;
 		}
 
+		echo("Server: sending setting " @ %id @ " (" @ %name @ ") value=" @ getVariable(%variable) @ " type=" @ %type);
 		commandToClient(%this, 'ServerSettingsListItem', %id, %name, getVariable(%variable), %type, %min, %max);
 	}
 	commandToClient(%this, 'ServerSettingsListEnd');
@@ -166,6 +168,7 @@ serverAddSetting("AllowTaunts",         "Allow Taunts",        "$MPPref::Server:
 serverAddSetting("AllowGuests",         "Allow Guests",        "$MPPref::Server::AllowGuests",       false,     "check");
 serverAddSetting("DoubleSpawns",        "Double Spawns",       "$MPPref::Server::DoubleSpawnGroups", true,      "check");
 serverAddSetting("CompetitiveMode",     "Competitive Mode",    "$MPPref::Server::CompetitiveMode",   true,      "check");
+serverAddSetting("RaceModeCoop",        "Race Mode for Co-op", "$MPPref::Server::RaceModeCoop",      true,      "check");
 // serverAddSetting("StealMode",           "Steal Mode",          "$MPPref::Server::StealMode",   true,     "check");
 
 //Called before a server variable is set

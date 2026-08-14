@@ -189,6 +189,9 @@ $MPPref::Server::DoubleSpawnGroups = false;
 //20s timer and remaining gems
 $MPPref::Server::CompetitiveMode = false;
 
+//Whether cooperative missions should run in race mode
+$MPPref::Server::RaceModeCoop = false;
+
 //Steal Mode shouldn't be enabled by default
 $MPPref::Server::StealMode = false;
 

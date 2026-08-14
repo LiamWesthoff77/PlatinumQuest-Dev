@@ -54,7 +54,19 @@ function ClientMode_race::onLoad(%this) {
 	%this.registerCallback("shouldPickupItem");
 	%this.registerCallback("shouldUseClientPowerups");
 	%this.registerCallback("radarShouldShowObject");
+	%this.registerCallback("onMissionReset");
 	echo("[Mode" SPC %this.name @ " Client]: Loaded!");
+}
+function ClientMode_race::onMissionReset(%this) {
+	//Fresh attempt - claimed time items become pickupable (and visible)
+	//again. The server clears its own matching guard in
+	//TimeTravelItem::onMissionReset.
+	%count = ServerConnection.getCount();
+	for (%i = 0; %i < %count; %i ++) {
+		%obj = ServerConnection.getObject(%i);
+		if (%obj.getDataBlock().getClassName() $= "ItemData")
+			%obj.raceClaimed = false;
+	}
 }
 function ClientMode_race::onRespawnPlayer(%this) {
 	racingOnRespawn();
@@ -132,12 +144,24 @@ function clientCmdGemPickup(%id) {
 	Radar::RemoveTarget(%gem);
 }
 
+//Unlike gems, a time item shouldn't come back just because you fell back
+//to (or before) a checkpoint - once you've claimed it, it's yours for the
+//rest of this attempt. raceClaimed marks that permanently (until mission
+//reset - see ClientMode_race::onMissionReset), separately from the
+//checkpoint-based _checkpoint tracking gems use.
+function clientCmdTimeItemPickup(%id) {
+	%item = getClientSyncObject(%id);
+	%item.hide(true);
+	%item.raceClaimed = true;
+	Radar::RemoveTarget(%item);
+}
+
 function racingOnRespawn() {
 	%count = ServerConnection.getCount();
 
 	for (%i = 0; %i < %count; %i ++) {
 		%obj = ServerConnection.getObject(%i);
-		if (%obj.getDataBlock().getClassName() $= "ItemData") {
+		if (%obj.getDataBlock().getClassName() $= "ItemData" && !%obj.raceClaimed) {
 			%obj.hide(false);
 			%obj._checkpoint = 0;
 			%obj.startFade(0, 0, false);
@@ -150,7 +174,7 @@ function racingOnRespawnAtCheckpoint() {
 
 	for (%i = 0; %i < %count; %i ++) {
 		%obj = ServerConnection.getObject(%i);
-		if (%obj.getDataBlock().getClassName() $= "ItemData" && %obj._checkpoint >= $Client::RaceLastCP) {
+		if (%obj.getDataBlock().getClassName() $= "ItemData" && !%obj.raceClaimed && %obj._checkpoint >= $Client::RaceLastCP) {
 			%obj.hide(false);
 			%obj._checkpoint = 0;
 			%obj.startFade(0, 0, false);
