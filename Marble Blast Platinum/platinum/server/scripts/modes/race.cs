@@ -26,7 +26,10 @@ function Mode_race::onLoad(%this) {
 	%this.registerCallback("onMissionLoaded");
 	%this.registerCallback("onMissionReset");
 	%this.registerCallback("onClientLeaveGame");
+	%this.registerCallback("onStartPlaying");
 	%this.registerCallback("onEnterPad");
+	%this.registerCallback("onEndGameSetup");
+	%this.registerCallback("onOutOfBounds");
 	%this.registerCallback("shouldPickupGem");
 	%this.registerCallback("shouldPickupTimeItem");
 	%this.registerCallback("shouldPickupPowerUp");
@@ -235,8 +238,13 @@ function Mode_race::getScoreType(%this) {
 	return $ScoreType::Time;
 }
 function Mode_race::getFinalScore(%this, %object) {
-	if (%object.client.raceFinishTime >= 0)
+	if (%object.client.raceFinished)
 		return $ScoreType::Time TAB %object.client.raceFinishTime;
+	if (%object.client.raceDNF)
+		//Sorts after every real finish time (which is capped well below this
+		//by the clock's own 5999999 max), without colliding with the
+		//999999999 sentinel the client-side sort loops seed themselves with
+		return $ScoreType::Time TAB 99999999;
 	return $ScoreType::Time TAB %object.client.clockTime;
 }
 function Mode_race::getQuickRespawnTimeout(%this, %object) {
@@ -246,11 +254,87 @@ function Mode_race::getQuickRespawnTimeout(%this, %object) {
 function GameConnection::resetRaceStats(%this) {
 	%this.raceFinished = false;
 	%this.raceFinishTime = -1;
+	%this.raceDNF = false;
 	%this.racePlace = 0;
 	%this.clockTime = 0;
 	%this.bonusTime = 0;
 	%this.totalBonus = 0;
 	%this.raceStartTime = %this.clockTime;
+}
+
+//The game only ends once someone still racing can no longer affect the
+//standings (see checkRaceShouldEnd), which can leave players who never
+//crossed the finish line. Mark them DNF here, before scores go out, instead
+//of falling back to getFinalScore's live-clockTime branch (which reads as
+//"finished a fraction of a second behind the last real finisher").
+function Mode_race::onEndGameSetup(%this) {
+	%count = ClientGroup.getCount();
+	for (%i = 0; %i < %count; %i ++) {
+		%client = ClientGroup.getObject(%i);
+		if (!%client.raceFinished)
+			%client.raceDNF = true;
+	}
+
+	%this.announceFinalStandings();
+}
+
+//Re-announce every finish (in rank order, DNFs last) once the race is
+//actually over, instead of relying on the scattered "X finished in Y!"
+//messages sent as each player crossed the line.
+function Mode_race::announceFinalStandings(%this) {
+	%count = ClientGroup.getCount();
+	if (%count == 0)
+		return;
+
+	serverSendChat("Final Standings:");
+
+	%used = Array(RaceStandingsUsedArray);
+	%rank = 0;
+	for (%i = 0; %i < %count; %i ++) {
+		%bestTime = 999999999;
+		%bestClient = -1;
+		for (%j = 0; %j < %count; %j ++) {
+			%client = ClientGroup.getObject(%j);
+			if (%used.containsEntry(%client))
+				continue;
+			//Must be strictly less than %bestTime's own seed value below, or a
+			//DNF never wins the "< %bestTime" check once it's the only
+			//candidate left and silently drops out of the recap
+			%time = %client.raceDNF ? 99999999 : %client.raceFinishTime;
+			if (%time < %bestTime) {
+				%bestTime = %time;
+				%bestClient = %client;
+			}
+		}
+		if (!isObject(%bestClient))
+			break;
+
+		%used.addEntry(%bestClient);
+		%rank ++;
+
+		if (%bestClient.raceDNF)
+			serverSendChat(%rank @ ". " @ %bestClient.getDisplayName() @ " (DNF)");
+		else
+			serverSendChat(%rank @ ". " @ %bestClient.getDisplayName() @ " (" @ formatTime(%bestClient.raceFinishTime) @ ")");
+	}
+	%used.delete();
+}
+
+//Flash the offending player's name red on everyone's live standings for a
+//moment when they go OOB.
+function Mode_race::onOutOfBounds(%this, %object) {
+	commandToAll('RaceOOBFlash', %object.client.index);
+}
+
+//A late joiner isn't in ClientGroup yet when onMissionLoaded/onMissionReset
+//run resetRaceStats on everyone, so their clock never gets initialized.
+//Catch them the moment they actually start playing (exiting spectator
+//mode) instead - guarded so it only fires once, and never re-fires for a
+//player who briefly re-spectates mid-race or has already finished.
+function Mode_race::onStartPlaying(%this, %object) {
+	%client = %object.client;
+	if (%client.raceStartTime $= "" && !%client.raceFinished)
+		%client.resetRaceStats();
 }
 
 

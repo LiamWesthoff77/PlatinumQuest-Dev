@@ -766,7 +766,12 @@ function MPEndGameDlg::updateScores(%this) {
 		}
 	} else {
 		%face   = "<font:28>";
-		%font   = %face @ "<color:ffffff><tab:40,280,590,650>";
+		//Must mirror the header's tab list (minus the "Marble" stop, which
+		//has no text chunk of its own in the row)
+		if (%timeMode)
+			%font = %face @ "<color:ffffff><tab:40,280,590,680>";
+		else
+			%font = %face @ "<color:ffffff><tab:40,280,590,650>";
 		%players = $MP::ScorePlayers;
 		%rowIdx = 0;
 
@@ -799,6 +804,9 @@ function MPEndGameDlg::updateScores(%this) {
 			%score  = ScoreList.getEntry(%bestIdx).score;
 			%index  = ScoreList.getEntry(%bestIdx).index;
 			%marble = ScoreList.getEntry(%bestIdx).skin;
+			%bonus    = ScoreList.getEntry(%bestIdx).bonus;
+			%oobCount = ScoreList.getEntry(%bestIdx).oobCount;
+			%dnf      = ScoreList.getEntry(%bestIdx).dnf;
 
 			// Size of score rows
 			%itemHeight   = 44;
@@ -939,7 +947,9 @@ function MPEndGameDlg::updateScores(%this) {
 			%scoreIdx = (%vs ? 0 : 1);
 
 			//The gem-score tier thresholds don't mean anything for a time value
-			if (%timeMode) {
+			if (%timeMode && %dnf) {
+				%score = "DNF";
+			} else if (%timeMode) {
 				%score = formatTime(%score);
 			} else if (%score < MissionInfo.score[%scoreIdx] && MissionInfo.score[%scoreIdx]) {
 				%score = "<spush>" @ %scoreColor @ "<color:FF6666>" @ %score @ "<spop>";
@@ -959,7 +969,17 @@ function MPEndGameDlg::updateScores(%this) {
 			else
 				%changeLabel = "0";
 
-			%scoreText.setText(%font @ %rowIdx @ "." TAB clipPx($DefaultFont, 28, LBResolveName(%player, true), 230, true) TAB %score TAB formatLevel(%rating) TAB %changeLabel);
+			//Race mode has no master-server level/rating, so repurpose those
+			//two columns to show time-bonus and OOB totals instead
+			if (%timeMode) {
+				%col4 = (%bonus / 1000) @ "s";
+				%col5 = %oobCount;
+			} else {
+				%col4 = formatLevel(%rating);
+				%col5 = %changeLabel;
+			}
+
+			%scoreText.setText(%font @ %rowIdx @ "." TAB clipPx($DefaultFont, 28, LBResolveName(%player, true), 230, true) TAB %score TAB %col4 TAB %col5);
 			%scoreTextR.setText(%font @ "<just:center>" @ %gems1);
 			%scoreTextY.setText(%font @ "<just:center>" @ %gems2);
 			%scoreTextB.setText(%font @ "<just:center>" @ %gems5);
@@ -999,8 +1019,19 @@ function MPEndGameDlg::updateScores(%this) {
 	%itemHeight = 44;
 	MPEndGameListContainer.setHeight(%itemHeight * MPEndGameListContainer.getCount());
 
-	%scoreLabel = %timeMode ? "Final Time" : "Score";
-	MPEndGameHeader.setText("<bold:30><color:FFFFFF><tab:40,280,510,590,650> \tName\t" @ %scoreLabel @ "\tMarble\tLevel\tPoints");
+	if (%timeMode) {
+		%scoreLabel = "Final Time";
+		%col4Label = "Bonus";
+		%col5Label = "OOB";
+		//"Bonus"/"OOB" need more breathing room than "Level"/"Points" did,
+		//so widen the last column and push OOB out to make space
+		MPEndGameHeader.setText("<bold:30><color:FFFFFF><tab:40,280,510,590,680> \tName\t" @ %scoreLabel @ "\tMarble\t" @ %col4Label @ "\t" @ %col5Label);
+	} else {
+		%scoreLabel = "Score";
+		%col4Label = "Level";
+		%col5Label = "Points";
+		MPEndGameHeader.setText("<bold:30><color:FFFFFF><tab:40,280,510,590,650> \tName\t" @ %scoreLabel @ "\tMarble\t" @ %col4Label @ "\t" @ %col5Label);
+	}
 
 	%text = "<bold:48><color:FFFFFF><just:center><shadowcolor:0000007f><shadow:1:1>";
 	%score = PlayGui.gemCount;

@@ -292,6 +292,8 @@ function GameConnection::updateScores(%this) {
 			          TAB %scoreType
 			          TAB %client.bonusTime
 			          TAB %client.getGemCount()
+			          TAB %client.oobCount
+			          TAB %client.raceDNF
 			          ;
 
 			if (%list $= "")
@@ -331,7 +333,7 @@ function updateSingleScore(%client) {
 		%scoreType = getField(%scoreRecord, 0);
 		%score = getField(%scoreRecord, 1);
 		%gems = %client.gemsFound[1] SPC %client.gemsFound[2] SPC %client.gemsFound[5] SPC %client.gemsFound[10];
-		commandToAll('ScoreListUpdate', %client.index, %score, %gems, %client.totalBonus, %scoreType, %client.bonusTime, %client.getGemCount());
+		commandToAll('ScoreListUpdate', %client.index, %score, %gems, %client.totalBonus, %scoreType, %client.bonusTime, %client.getGemCount(), %client.oobCount, %client.raceDNF);
 	}
 }
 

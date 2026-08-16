@@ -72,6 +72,8 @@ function clientCmdScoreListPlayer(%list) {
 		%scoreType = getField(%record, 6);
 		%pendingBonus = getField(%record, 7);
 		%gemCount = getField(%record, 8);
+		%oobCount = getField(%record, 9);
+		%dnf = getField(%record, 10);
 
 		%obj = new ScriptObject() {
 			name = %name;
@@ -83,6 +85,9 @@ function clientCmdScoreListPlayer(%list) {
 			scoreType = %scoreType;
 			pendingBonus = %pendingBonus;
 			gemCount = %gemCount;
+			oobCount = %oobCount;
+			dnf = %dnf;
+			oobFlash = false;
 		};
 		ScoreObjectGroup.add(%obj);
 		ScoreList.addEntry(%obj);
@@ -93,7 +98,7 @@ function clientCmdScoreListPlayer(%list) {
 	scoreListUpdate();
 }
 
-function clientCmdScoreListUpdate(%index, %score, %gems, %bonus, %scoreType, %pendingBonus, %gemCount) {
+function clientCmdScoreListUpdate(%index, %score, %gems, %bonus, %scoreType, %pendingBonus, %gemCount, %oobCount, %dnf) {
 	//Delete all player objects in the list
 	%player = ScoreList.player[%index];
 	if (!isObject(%player))
@@ -104,8 +109,74 @@ function clientCmdScoreListUpdate(%index, %score, %gems, %bonus, %scoreType, %pe
 	%player.scoreType = %scoreType;
 	%player.pendingBonus = %pendingBonus;
 	%player.gemCount = %gemCount;
+	%player.oobCount = %oobCount;
+	%player.dnf = %dnf;
 
 	scoreListUpdate();
+}
+
+//Sent by Mode_race::onOutOfBounds - briefly flashes the player's name red on
+//everyone's live standings, then reverts itself after half a second.
+function clientCmdRaceOOBFlash(%index) {
+	%player = ScoreList.player[%index];
+	if (!isObject(%player))
+		return;
+	%player.oobFlash = true;
+	scoreListUpdate();
+	schedule(500, 0, "clearRaceOOBFlash", %index);
+}
+
+function clearRaceOOBFlash(%index) {
+	%player = ScoreList.player[%index];
+	if (isObject(%player))
+		%player.oobFlash = false;
+	scoreListUpdate();
+}
+
+//Sent by GameConnection::respawnOnCheckpoint whenever a checkpoint fallback
+//costs someone gems - pops a small "-N" next to their gem count on the live
+//standings that rises slightly and fades out.
+function clientCmdGemCountLoss(%index, %lost) {
+	%gemsCtrl = "PGScoreGems" @ %index;
+	%container = "PGScoreContainer" @ %index;
+	if (!isObject(%gemsCtrl) || !isObject(%container))
+		return;
+
+	%popup = "PGGemLossPopup" @ %index;
+	if (isObject(%popup)) {
+		cancel(%popup.fadeSchedule);
+		%popup.delete();
+	}
+
+	%pos = %gemsCtrl.getPosition();
+	%startY = getWord(%pos, 1) - 2;
+	%container.add(new GuiMLTextCtrl(%popup) {
+		profile = "GuiMLTextProfile";
+		position = (getWord(%pos, 0) + 42) SPC %startY;
+		extent = "40 14";
+		visible = "1";
+		lineSpacing = "2";
+		maxChars = "-1";
+	});
+	%popup.startY = %startY;
+	%popup.setText("<font:28><color:cc7766>-" @ %lost);
+
+	gemLossPopupFade(%popup, 1.0);
+}
+
+function gemLossPopupFade(%popup, %fade) {
+	if (!isObject(%popup))
+		return;
+
+	%popup.setAlpha(%fade);
+	%popup.setPosition(getWord(%popup.getPosition(), 0) SPC (%popup.startY - (1 - %fade) * 18));
+
+	%nextFade = %fade - 0.1;
+	if (%nextFade > 0) {
+		%popup.fadeSchedule = schedule(32, 0, gemLossPopupFade, %popup, %nextFade);
+	} else {
+		%popup.delete();
+	}
 }
 
 function clientCmdScoreListTeamPlayer(%list) {
@@ -663,6 +734,8 @@ function scoreListUpdate() {
 			%gems   = ScoreList.getEntry(%bestIdx).gems;
 			%pendingBonus = ScoreList.getEntry(%bestIdx).pendingBonus;
 			%gemCount = ScoreList.getEntry(%bestIdx).gemCount;
+			%dnf = ScoreList.getEntry(%bestIdx).dnf;
+			%oobFlash = ScoreList.getEntry(%bestIdx).oobFlash;
 			%state  = isObject(PlayerList) ? PlayerList.getEntryByVariable("name", %player).specState : 0;
 			%ping   = isObject(PlayerList) ? PlayerList.getEntryByVariable("name", %player).ping : 0;
 
@@ -861,7 +934,10 @@ function scoreListUpdate() {
 			      || ($Server::_Dedicated && isObject(ScoreList.player[1])); //Hosting dedicated, hack but should work
 			%scoreIdx = (%vs ? 0 : 1);
 
-			%displayScore = %timeMode ? formatTime(%score) : %score;
+			if (%timeMode && %dnf)
+				%displayScore = "DNF";
+			else
+				%displayScore = %timeMode ? formatTime(%score) : %score;
 
 			//Time strings are a consistent length, so give the name a fixed
 			//budget instead of shrinking it as the score field grows
@@ -870,8 +946,11 @@ function scoreListUpdate() {
 			//Match the green the personal timer shows while a time bonus is actively counting down
 			%scoreColorTag = (%timeMode && %pendingBonus > 0) ? "<color:88ffcc>" : "";
 
+			//Flash a player's name red for a moment right after they go OOB
+			%nameColorTag = %oobFlash ? "<color:ff4444>" : "";
+
 			%scoreText.setText(%font @ %rowIdx @ "." TAB clipPx($DefaultFont, 28, LBResolveName(%player, true), 280, true) TAB %face @ %displayScore);
-			%pgscoreText.setText(%pgfont @ %color[%rowIdx] @ %rowIdx @ "." SPC clipPx($DefaultFont, 28, %prefix @ LBResolveName(%player, true), %nameWidth, true) @ "<just:right>" @ %pgface @ %scoreColorTag @ %displayScore);
+			%pgscoreText.setText(%pgfont @ %color[%rowIdx] @ %rowIdx @ "." SPC "<spush>" @ %nameColorTag @ clipPx($DefaultFont, 28, %prefix @ LBResolveName(%player, true), %nameWidth, true) @ "<spop><just:right>" @ %pgface @ %scoreColorTag @ %displayScore);
 
 			%gems1  = "<spush><color:FF0000>" @ %scoreColor @ %gems1  @ "<spop>";
 			%gems2  = "<spush><color:FFFF00>" @ %scoreColor @ %gems2  @ "<spop>";

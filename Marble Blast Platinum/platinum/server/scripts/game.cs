@@ -867,6 +867,7 @@ function GameConnection::resetStats(%this) {
 	%this.bonusTime = 0;
 	%this.gemCount = 0;
 	%this.totalBonus = 0;
+	%this.oobCount = 0;
 
 	%this.gemsFound[1] = 0;
 	%this.gemsFound[2] = 0;
@@ -1021,6 +1022,7 @@ function GameConnection::onOutOfBounds(%this, %hideMessage) {
 	commandToClient(%this, 'LockPowerup', true);
 
 	%this.incrementOOBCounter(); // Moved to clientCmds
+	%this.oobCount++;
 	%this.sendCallback("OnOutOfBounds");
 
 	if (!isEventPending(%this.respawnSchedule)) {
@@ -1314,7 +1316,13 @@ function GameConnection::respawnPlayer(%this, %respawnPos) {
 		_delete = true;
 	});
 	if (%respawn && $Server::ServerType $= "MultiPlayer") {
+		%oldGemCount = %this.getGemCount();
 		%this.restoreCheckpointGemCount();
+
+		%lost = %oldGemCount - %this.getGemCount();
+		if (%lost > 0)
+			commandToAll('GemCountLoss', %this.index, %lost);
+
 		%this.respawnObjects(MissionGroup);
 	}
 
