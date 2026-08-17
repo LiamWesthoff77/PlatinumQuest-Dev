@@ -359,9 +359,11 @@ function Mode_race::onStartPlaying(%this, %object) {
 //Blast's self-launch is still fine in a race (whether it's even available at
 //all is decided per-level, client-side - see ClientMode_race::shouldEnableBlast),
 //but the knockback shockwave it sends to nearby players doesn't belong in a
-//race, even on Ultra levels where blast itself is on.
+//race, even on Ultra levels where blast itself is on. Marble Melee Primer is
+//the one exception - it's the Ultra tutorial level for the shockwave itself
+//("shoves other marbles away"), so leave it on there.
 function Mode_race::shouldDisableBlastShockwave(%this) {
-	return true;
+	return fileBase($Server::MissionFile) !$= "mptrain_ultra";
 }
 
 //The default "someone has to actually play" spectator cap (getRealPlayerCount() - 1)
