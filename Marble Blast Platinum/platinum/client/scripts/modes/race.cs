@@ -56,6 +56,7 @@ function ClientMode_race::onLoad(%this) {
 	%this.registerCallback("radarShouldShowObject");
 	%this.registerCallback("onMissionReset");
 	%this.registerCallback("shouldEnableBlast");
+	%this.registerCallback("shouldUpdateBlast");
 	echo("[Mode" SPC %this.name @ " Client]: Loaded!");
 }
 //Blast is only available on Ultra race levels, never Gold/Platinum -
@@ -63,6 +64,12 @@ function ClientMode_race::onLoad(%this) {
 //(Ultra's set it to "Ultra", Gold/Platinum's never set it at all)
 function ClientMode_race::shouldEnableBlast(%this) {
 	return MissionInfo.game $= "Ultra";
+}
+//shouldUpdateBlast()'s own default only charges blast once $PlayTimerActive
+//is set, which doesn't happen until "Go!" - let it charge through the
+//Ready/Set/Go countdown too, so it's not wasted standing still waiting to start
+function ClientMode_race::shouldUpdateBlast(%this) {
+	return shouldEnableBlast() && ($Game::State $= "Ready");
 }
 function ClientMode_race::onMissionReset(%this) {
 	//Fresh attempt - claimed time items become pickupable (and visible)
