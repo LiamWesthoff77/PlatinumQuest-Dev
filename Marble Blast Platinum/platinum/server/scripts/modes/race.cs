@@ -31,6 +31,8 @@ function Mode_race::onLoad(%this) {
 	%this.registerCallback("onEndGameSetup");
 	%this.registerCallback("onOutOfBounds");
 	%this.registerCallback("shouldDisableBlastShockwave");
+	%this.registerCallback("shouldUseUltraMarble");
+	%this.registerCallback("getUltraMarbleSize");
 	%this.registerCallback("shouldPickupGem");
 	%this.registerCallback("shouldPickupTimeItem");
 	%this.registerCallback("shouldPickupPowerUp");
@@ -348,6 +350,18 @@ function Mode_race::onStartPlaying(%this, %object) {
 //race, even on Ultra levels where blast itself is on.
 function Mode_race::shouldDisableBlastShockwave(%this) {
 	return true;
+}
+
+//Mode_null already does exactly this by default, but race never registered
+//either callback, so it was silently falling back to the regular (smaller)
+//marble even on Ultra levels where MissionInfo.useUltraMarble is set. The
+//size difference alone accounts for the "different physics" feel - there's
+//no separate Ultra physics tuning, just a bigger collision radius.
+function Mode_race::shouldUseUltraMarble(%this, %object) {
+	return !!MissionInfo.useUltraMarble;
+}
+function Mode_race::getUltraMarbleSize(%this, %object) {
+	return %object.client.player.getDataBlock().ultraScale;
 }
 
 

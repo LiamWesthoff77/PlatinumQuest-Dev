@@ -141,6 +141,7 @@ function clearRaceOOBFlash(%index) {
 //control instead of constructing one on the fly.
 function clientCmdGemCountLoss(%index, %lost) {
 	%popup = "PGGemLossPopup" @ %index;
+	echo("[GemLoss] client received index=" @ %index SPC "lost=" @ %lost SPC "popup=" @ %popup SPC "exists=" @ isObject(%popup));
 	if (!isObject(%popup))
 		return;
 
@@ -902,7 +903,11 @@ function scoreListUpdate() {
 			%gems5     = mFloor(getWord(%gems, 2));
 			%gems10    = mFloor(getWord(%gems, 3));
 
-			%pgscoreGems.setText(%pgfont @ "<just:center>" @ %gemCount @ "/" @ PlayGui.maxGems);
+			//Flash a player's name, timer, and gem count red for a moment
+			//right after they go OOB
+			%oobColorTag = %oobFlash ? "<color:ff4444>" : "";
+
+			%pgscoreGems.setText(%pgfont @ "<just:center>" @ %oobColorTag @ %gemCount @ "/" @ PlayGui.maxGems);
 
 			%gems1  = %gems1  $= "" || %gems1  == 0 ? "0" : %gems1;
 			%gems2  = %gems2  $= "" || %gems2  == 0 ? "0" : %gems2;
@@ -939,14 +944,12 @@ function scoreListUpdate() {
 			//budget instead of shrinking it as the score field grows
 			%nameWidth = %timeMode ? 170 : 200 - (15 * strlen(%displayScore));
 
-			//Match the green the personal timer shows while a time bonus is actively counting down
-			%scoreColorTag = (%timeMode && %pendingBonus > 0) ? "<color:88ffcc>" : "";
-
-			//Flash a player's name red for a moment right after they go OOB
-			%nameColorTag = %oobFlash ? "<color:ff4444>" : "";
+			//Match the green the personal timer shows while a time bonus is actively counting down,
+			//unless they just went OOB - that red takes priority over the bonus green
+			%scoreColorTag = %oobFlash ? %oobColorTag : ((%timeMode && %pendingBonus > 0) ? "<color:88ffcc>" : "");
 
 			%scoreText.setText(%font @ %rowIdx @ "." TAB clipPx($DefaultFont, 28, LBResolveName(%player, true), 280, true) TAB %face @ %displayScore);
-			%pgscoreText.setText(%pgfont @ %color[%rowIdx] @ %rowIdx @ "." SPC "<spush>" @ %nameColorTag @ clipPx($DefaultFont, 28, %prefix @ LBResolveName(%player, true), %nameWidth, true) @ "<spop><just:right>" @ %pgface @ %scoreColorTag @ %displayScore);
+			%pgscoreText.setText(%pgfont @ %color[%rowIdx] @ %rowIdx @ "." SPC "<spush>" @ %oobColorTag @ clipPx($DefaultFont, 28, %prefix @ LBResolveName(%player, true), %nameWidth, true) @ "<spop><just:right>" @ %pgface @ %scoreColorTag @ %displayScore);
 
 			%gems1  = "<spush><color:FF0000>" @ %scoreColor @ %gems1  @ "<spop>";
 			%gems2  = "<spush><color:FFFF00>" @ %scoreColor @ %gems2  @ "<spop>";

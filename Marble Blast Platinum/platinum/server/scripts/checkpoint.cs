@@ -464,6 +464,7 @@ function GameConnection::respawnOnCheckpoint(%this) {
 	%this.restoreCheckpointGemCount();
 
 	%lost = %oldGemCount - %this.getGemCount();
+	echo("[GemLoss] respawnOnCheckpoint:" SPC %this.getUsername() SPC "old=" @ %oldGemCount SPC "new=" @ %this.getGemCount() SPC "lost=" @ %lost SPC "index=" @ %this.index);
 	if (%lost > 0)
 		commandToAll('GemCountLoss', %this.index, %lost);
 
