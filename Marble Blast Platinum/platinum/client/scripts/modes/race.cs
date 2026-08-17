@@ -85,17 +85,23 @@ function ClientMode_race::onRespawnOnCheckpoint(%this) {
 function ClientMode_race::onActivateCheckpoint(%this) {
 	$Client::RaceLastCP ++;
 }
+//Every base powerup datablock the switches below need to recognize also has
+//_PQ and/or _MBU (Ultra) variants (e.g. MegaMarbleItem_MBU, BlastItem_MBU)
+//used by their respective levels - matching only the base name here left
+//Ultra powerups like Marble Melee Primer's Blast/Mega Marble completely
+//unpickupable in race, since the datablock name never matched any case and
+//fell through to "ignore this item" / "don't pick it up".
 function ClientMode_race::shouldIgnoreItem(%this, %object) {
 	switch$ (%object.this.getDataBlock().getName()) {
-	case "SuperJumpItem" or
-			"SuperSpeedItem" or
-			"SuperBounceItem" or
-			"ShockAbsorberItem" or
-			"HelicopterItem" or
-			"MegaMarbleItem" or
-			"BlastItem" or
-			"AntiGravityItem" or
-			"NoRespawnAntiGravityItem":
+	case "SuperJumpItem" or "SuperJumpItem_PQ" or "SuperJumpItem_MBU" or "CustomSuperJumpItem_PQ" or
+			"SuperSpeedItem" or "SuperSpeedItem_PQ" or "SuperSpeedItem_MBU" or
+			"SuperBounceItem" or "SuperBounceItem_PQ" or
+			"ShockAbsorberItem" or "ShockAbsorberItem_PQ" or
+			"HelicopterItem" or "HelicopterItem_PQ" or "HelicopterItem_MBU" or
+			"MegaMarbleItem" or "MegaMarbleItem_MBU" or
+			"BlastItem" or "BlastItem_MBU" or
+			"AntiGravityItem" or "AntiGravityItem_PQ" or "AntiGravityItem_MBU" or
+			"NoRespawnAntiGravityItem" or "NoRespawnAntiGravityItem_PQ" or "NoRespawnAntiGravityItem_MBU":
 		//PowerUp
 		if (%object.this.respawning) {
 			return true;
@@ -113,15 +119,15 @@ function ClientMode_race::shouldIgnoreItem(%this, %object) {
 }
 function ClientMode_race::shouldPickupItem(%this, %object) {
 	switch$ (%object.this.getDataBlock().getName()) {
-	case "SuperJumpItem" or
-			"SuperSpeedItem" or
-			"SuperBounceItem" or
-			"ShockAbsorberItem" or
-			"HelicopterItem" or
-			"MegaMarbleItem" or
-			"BlastItem" or
-			"AntiGravityItem" or
-			"NoRespawnAntiGravityItem":
+	case "SuperJumpItem" or "SuperJumpItem_PQ" or "SuperJumpItem_MBU" or "CustomSuperJumpItem_PQ" or
+			"SuperSpeedItem" or "SuperSpeedItem_PQ" or "SuperSpeedItem_MBU" or
+			"SuperBounceItem" or "SuperBounceItem_PQ" or
+			"ShockAbsorberItem" or "ShockAbsorberItem_PQ" or
+			"HelicopterItem" or "HelicopterItem_PQ" or "HelicopterItem_MBU" or
+			"MegaMarbleItem" or "MegaMarbleItem_MBU" or
+			"BlastItem" or "BlastItem_MBU" or
+			"AntiGravityItem" or "AntiGravityItem_PQ" or "AntiGravityItem_MBU" or
+			"NoRespawnAntiGravityItem" or "NoRespawnAntiGravityItem_PQ" or "NoRespawnAntiGravityItem_MBU":
 		//PowerUp
 		if (%object.this.respawning) {
 			return false;
