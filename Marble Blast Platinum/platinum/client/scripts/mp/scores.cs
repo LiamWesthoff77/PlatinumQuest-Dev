@@ -148,11 +148,8 @@ function clientCmdGemCountLoss(%index, %lost) {
 	%popup.startX = getWord(%popup.getPosition(), 0);
 	%popup.startY = getWord(%popup.getPosition(), 1);
 	%popup.setText("<font:28><color:cc7766>-" @ %lost);
-	%popup.setAlpha(1.0);
-	%popup.setPosition(%popup.startX SPC %popup.startY);
 
-	//Hold at full opacity for a beat before starting the fade/drift
-	%popup.fadeSchedule = schedule(1000, 0, gemLossPopupFade, %popup, 1.0);
+	gemLossPopupFade(%popup, 1.0);
 }
 
 function gemLossPopupFade(%popup, %fade) {
