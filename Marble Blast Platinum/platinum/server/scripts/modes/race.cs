@@ -30,6 +30,7 @@ function Mode_race::onLoad(%this) {
 	%this.registerCallback("onEnterPad");
 	%this.registerCallback("onEndGameSetup");
 	%this.registerCallback("onOutOfBounds");
+	%this.registerCallback("shouldDisableBlastShockwave");
 	%this.registerCallback("shouldPickupGem");
 	%this.registerCallback("shouldPickupTimeItem");
 	%this.registerCallback("shouldPickupPowerUp");
@@ -245,6 +246,10 @@ function Mode_race::getFinalScore(%this, %object) {
 		//by the clock's own 5999999 max), without colliding with the
 		//999999999 sentinel the client-side sort loops seed themselves with
 		return $ScoreType::Time TAB 99999999;
+	if (%object.client.raceStartTime $= "")
+		//Hasn't actually started racing yet (still spectating, e.g. a late
+		//joiner) - show a neutral 00:00.000 instead of a blank/undefined clock
+		return $ScoreType::Time TAB 0;
 	return $ScoreType::Time TAB %object.client.clockTime;
 }
 function Mode_race::getQuickRespawnTimeout(%this, %object) {
@@ -335,6 +340,14 @@ function Mode_race::onStartPlaying(%this, %object) {
 	%client = %object.client;
 	if (%client.raceStartTime $= "" && !%client.raceFinished)
 		%client.resetRaceStats();
+}
+
+//Blast's self-launch is still fine in a race (whether it's even available at
+//all is decided per-level, client-side - see ClientMode_race::shouldEnableBlast),
+//but the knockback shockwave it sends to nearby players doesn't belong in a
+//race, even on Ultra levels where blast itself is on.
+function Mode_race::shouldDisableBlastShockwave(%this) {
+	return true;
 }
 
 

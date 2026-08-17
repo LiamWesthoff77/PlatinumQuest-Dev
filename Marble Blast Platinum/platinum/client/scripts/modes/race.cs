@@ -55,7 +55,14 @@ function ClientMode_race::onLoad(%this) {
 	%this.registerCallback("shouldUseClientPowerups");
 	%this.registerCallback("radarShouldShowObject");
 	%this.registerCallback("onMissionReset");
+	%this.registerCallback("shouldEnableBlast");
 	echo("[Mode" SPC %this.name @ " Client]: Loaded!");
+}
+//Blast is only available on Ultra race levels, never Gold/Platinum -
+//MissionInfo.game is carried over unmodified from the source mission files
+//(Ultra's set it to "Ultra", Gold/Platinum's never set it at all)
+function ClientMode_race::shouldEnableBlast(%this) {
+	return MissionInfo.game $= "Ultra";
 }
 function ClientMode_race::onMissionReset(%this) {
 	//Fresh attempt - claimed time items become pickupable (and visible)

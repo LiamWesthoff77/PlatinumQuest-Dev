@@ -69,6 +69,8 @@ function Time::advance(%delta) {
 			%count = ClientGroup.getCount();
 			for (%i = 0; %i < %count; %i ++) {
 				%client = ClientGroup.getObject(%i);
+				if (%client.spectating)
+					continue;
 				%client.advanceClock(%delta, %mult);
 			}
 			return;

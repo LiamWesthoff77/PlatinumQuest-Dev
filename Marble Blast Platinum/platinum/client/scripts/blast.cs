@@ -31,6 +31,13 @@ function shouldEnableBlast() {
 			return false;
 	}
 
+	//Let the current mode override blast availability outright, regardless
+	//of mission/default settings below (race disables it for Gold/Platinum
+	//levels, which would otherwise default to on in MP, but keeps it for Ultra)
+	%modeOverride = ClientMode::callback("shouldEnableBlast", "");
+	if (%modeOverride !$= "")
+		return %modeOverride;
+
 	if (MissionInfo.noBlast) //Allow missions to disable blast in MP
 		return false;
 	if (MissionInfo.blast) //Allow missions to allow blast

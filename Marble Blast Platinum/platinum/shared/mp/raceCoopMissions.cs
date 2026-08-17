@@ -27,7 +27,8 @@ $RaceCoop::AddedFlag     = false; // guards against double-injection
 // modId TAB display name TAB space-separated difficulty folder suffixes
 $RaceCoop::Games[0] = "gold"     TAB "Race (Gold)"     TAB "beginner intermediate advanced";
 $RaceCoop::Games[1] = "platinum" TAB "Race (Platinum)" TAB "beginner intermediate advanced expert";
-$RaceCoop::GameCount = 2;
+$RaceCoop::Games[2] = "ultra"    TAB "Race (Ultra)"    TAB "beginner intermediate advanced";
+$RaceCoop::GameCount = 3;
 
 package RaceCoopMissions {
 
@@ -101,7 +102,7 @@ function addRaceCoopCategories() {
 			name           = %gameId;
 			display        = %display;
 			force_gamemode = "race";
-			has_blast      = false;
+			has_blast      = (%modId $= "ultra");
 			difficulties   = %difficultyArray;
 		});
 

@@ -133,32 +133,19 @@ function clearRaceOOBFlash(%index) {
 	scoreListUpdate();
 }
 
-//Sent by GameConnection::respawnOnCheckpoint whenever a checkpoint fallback
-//costs someone gems - pops a small "-N" next to their gem count on the live
-//standings that rises slightly and fades out.
+//Sent by GameConnection::respawnOnCheckpoint/respawnPlayer whenever a
+//checkpoint or start-pad fallback costs someone gems - pops a small "-N"
+//next to their gem count on the live standings that rises and fades out.
+//The popup control itself is pre-declared alongside PGScoreGems (see
+//scoreListUpdate) so this just has to drive an existing, already-awake
+//control instead of constructing one on the fly.
 function clientCmdGemCountLoss(%index, %lost) {
-	%gemsCtrl = "PGScoreGems" @ %index;
-	%container = "PGScoreContainer" @ %index;
-	if (!isObject(%gemsCtrl) || !isObject(%container))
+	%popup = "PGGemLossPopup" @ %index;
+	if (!isObject(%popup))
 		return;
 
-	%popup = "PGGemLossPopup" @ %index;
-	if (isObject(%popup)) {
-		cancel(%popup.fadeSchedule);
-		%popup.delete();
-	}
-
-	%pos = %gemsCtrl.getPosition();
-	%startY = getWord(%pos, 1) - 2;
-	%container.add(new GuiMLTextCtrl(%popup) {
-		profile = "GuiMLTextProfile";
-		position = (getWord(%pos, 0) + 42) SPC %startY;
-		extent = "40 14";
-		visible = "1";
-		lineSpacing = "2";
-		maxChars = "-1";
-	});
-	%popup.startY = %startY;
+	cancel(%popup.fadeSchedule);
+	%popup.startY = getWord(%popup.getPosition(), 1);
 	%popup.setText("<font:28><color:cc7766>-" @ %lost);
 
 	gemLossPopupFade(%popup, 1.0);
@@ -175,7 +162,8 @@ function gemLossPopupFade(%popup, %fade) {
 	if (%nextFade > 0) {
 		%popup.fadeSchedule = schedule(32, 0, gemLossPopupFade, %popup, %nextFade);
 	} else {
-		%popup.delete();
+		%popup.setText("");
+		%popup.setPosition(getWord(%popup.getPosition(), 0) SPC %popup.startY);
 	}
 }
 
@@ -829,6 +817,14 @@ function scoreListUpdate() {
 						profile = "GuiMLTextProfile";
 						position = "314 3";
 						extent = "60 14";
+						visible = "1";
+						lineSpacing = "2";
+						maxChars = "-1";
+					};
+					new GuiMLTextCtrl(PGGemLossPopup @ %index) {
+						profile = "GuiMLTextProfile";
+						position = "356 3";
+						extent = "40 14";
 						visible = "1";
 						lineSpacing = "2";
 						maxChars = "-1";
