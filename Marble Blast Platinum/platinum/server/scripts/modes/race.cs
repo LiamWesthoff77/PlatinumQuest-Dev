@@ -33,6 +33,7 @@ function Mode_race::onLoad(%this) {
 	%this.registerCallback("shouldDisableBlastShockwave");
 	%this.registerCallback("shouldUseUltraMarble");
 	%this.registerCallback("getUltraMarbleSize");
+	%this.registerCallback("getMaxSpectators");
 	%this.registerCallback("shouldPickupGem");
 	%this.registerCallback("shouldPickupTimeItem");
 	%this.registerCallback("shouldPickupPowerUp");
@@ -361,6 +362,15 @@ function Mode_race::onStartPlaying(%this, %object) {
 //race, even on Ultra levels where blast itself is on.
 function Mode_race::shouldDisableBlastShockwave(%this) {
 	return true;
+}
+
+//The default "someone has to actually play" spectator cap (getRealPlayerCount() - 1)
+//doesn't fit race - everyone joins into spectator mode by design and picks their own
+//moment to start, including a single player testing solo. Left uncapped, that default
+//was throwing the "too many people spectating" popup in perfectly normal situations.
+//No spectating behavior itself is meant to change here, just remove that cap.
+function Mode_race::getMaxSpectators(%this) {
+	return 9999;
 }
 
 //Mode_null already does exactly this by default, but race never registered
