@@ -66,10 +66,12 @@ function ClientMode_race::shouldEnableBlast(%this) {
 	return MissionInfo.game $= "Ultra";
 }
 //shouldUpdateBlast()'s own default only charges blast once $PlayTimerActive
-//is set, which doesn't happen until "Go!" - let it charge through the
-//Ready/Set/Go countdown too, so it's not wasted standing still waiting to start
+//is set, which doesn't happen until "Go!" - charge it from the moment the
+//marble spawns instead, same as single player. (Can't key this off
+//$Game::State: clientCmdSetGameState explicitly skips updating it for the
+//host, so that never reads "Ready" locally in a listen-served race.)
 function ClientMode_race::shouldUpdateBlast(%this) {
-	return shouldEnableBlast() && ($Game::State $= "Ready");
+	return shouldEnableBlast() && MPMyMarbleExists();
 }
 function ClientMode_race::onMissionReset(%this) {
 	//Fresh attempt - claimed time items become pickupable (and visible)
