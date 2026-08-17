@@ -769,7 +769,7 @@ function MPEndGameDlg::updateScores(%this) {
 		//Must mirror the header's tab list (minus the "Marble" stop, which
 		//has no text chunk of its own in the row)
 		if (%timeMode)
-			%font = %face @ "<color:ffffff><tab:40,280,590,680>";
+			%font = %face @ "<color:ffffff><tab:40,280,440,530>";
 		else
 			%font = %face @ "<color:ffffff><tab:40,280,590,650>";
 		%players = $MP::ScorePlayers;
@@ -913,6 +913,10 @@ function MPEndGameDlg::updateScores(%this) {
 				%scoreTextP.setVisible(false);
 			}
 
+			//Bonus/OOB sit where Marble used to (before Level/Points), so
+			//push the marble icon itself out past them in time mode
+			%objectView.resize((%timeMode ? 600 : 510), -10, 64, 64);
+
 			// Total row counter
 			%rowIdx ++;
 
@@ -972,7 +976,11 @@ function MPEndGameDlg::updateScores(%this) {
 			//Race mode has no master-server level/rating, so repurpose those
 			//two columns to show time-bonus and OOB totals instead
 			if (%timeMode) {
-				%col4 = (%bonus / 1000) @ "s";
+				%bonusFrac = %bonus % 1000;
+				%bonusFracOne = %bonusFrac % 10;
+				%bonusFracTen = mFloor((%bonusFrac % 100) / 10);
+				%bonusFracHun = mFloor(%bonusFrac / 100);
+				%col4 = mFloor(%bonus / 1000) @ "." @ %bonusFracHun @ %bonusFracTen @ %bonusFracOne;
 				%col5 = %oobCount;
 			} else {
 				%col4 = formatLevel(%rating);
@@ -1023,9 +1031,9 @@ function MPEndGameDlg::updateScores(%this) {
 		%scoreLabel = "Final Time";
 		%col4Label = "Bonus";
 		%col5Label = "OOB";
-		//"Bonus"/"OOB" need more breathing room than "Level"/"Points" did,
-		//so widen the last column and push OOB out to make space
-		MPEndGameHeader.setText("<bold:30><color:FFFFFF><tab:40,280,510,590,680> \tName\t" @ %scoreLabel @ "\tMarble\t" @ %col4Label @ "\t" @ %col5Label);
+		//Bonus/OOB come before Marble here (the marble icon itself is
+		//repositioned to match - see the %objectView.resize call above)
+		MPEndGameHeader.setText("<bold:30><color:FFFFFF><tab:40,280,440,530,600> \tName\t" @ %scoreLabel @ "\t" @ %col4Label @ "\t" @ %col5Label @ "\tMarble");
 	} else {
 		%scoreLabel = "Score";
 		%col4Label = "Level";
