@@ -141,11 +141,11 @@ function clearRaceOOBFlash(%index) {
 //control instead of constructing one on the fly.
 function clientCmdGemCountLoss(%index, %lost) {
 	%popup = "PGGemLossPopup" @ %index;
-	echo("[GemLoss] client received index=" @ %index SPC "lost=" @ %lost SPC "popup=" @ %popup SPC "exists=" @ isObject(%popup));
 	if (!isObject(%popup))
 		return;
 
 	cancel(%popup.fadeSchedule);
+	%popup.startX = getWord(%popup.getPosition(), 0);
 	%popup.startY = getWord(%popup.getPosition(), 1);
 	%popup.setText("<font:28><color:cc7766>-" @ %lost);
 
@@ -157,14 +157,16 @@ function gemLossPopupFade(%popup, %fade) {
 		return;
 
 	%popup.setAlpha(%fade);
-	%popup.setPosition(getWord(%popup.getPosition(), 0) SPC (%popup.startY - (1 - %fade) * 18));
+	//Rises and drifts right together for a diagonal motion
+	%travelled = (1 - %fade) * 18;
+	%popup.setPosition((%popup.startX + %travelled) SPC (%popup.startY - %travelled));
 
-	%nextFade = %fade - 0.1;
+	%nextFade = %fade - 0.05;
 	if (%nextFade > 0) {
 		%popup.fadeSchedule = schedule(32, 0, gemLossPopupFade, %popup, %nextFade);
 	} else {
 		%popup.setText("");
-		%popup.setPosition(getWord(%popup.getPosition(), 0) SPC %popup.startY);
+		%popup.setPosition(%popup.startX SPC %popup.startY);
 	}
 }
 
@@ -824,7 +826,7 @@ function scoreListUpdate() {
 					};
 					new GuiMLTextCtrl(PGGemLossPopup @ %index) {
 						profile = "GuiMLTextProfile";
-						position = "356 3";
+						position = "366 -3";
 						extent = "40 14";
 						visible = "1";
 						lineSpacing = "2";
