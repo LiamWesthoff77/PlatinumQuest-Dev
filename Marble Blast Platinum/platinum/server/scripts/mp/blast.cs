@@ -326,8 +326,16 @@ function GameConnection::makeBlastParticle(%this, %gravity) {
 
 	// get the blast particles
 	if (((Sky.materialList $= "platinum/data/skies_mbu/beginner/sky_beginner.dml") || (Sky.materialList $= "platinum/data/skies_mbu/intermediate/sky_intermediate.dml") || (Sky.materialList $= "platinum/data/skies_mbu/advanced/sky_advanced.dml")) && !$pref::LegacyItems) {
-		%this.player.unmountImage(0);
-		%this.mountSch = %this.player.schedule(25, "mountImage", BlastImage, 0); //This is so fucking scuffed but it works. - Daniel
+		//This image swap trick lives on image slot 0 - the same slot modes
+		//with client-handled powerups (like race) use to mount things like
+		//the helicopter locally. The server has no idea that's mounted, so
+		//stomping the slot here silently kills it with nothing to restore
+		//it afterward. Skip the swap there; the particle effect below still
+		//plays either way.
+		if (!Mode::callback("shouldUseClientPowerups", false)) {
+			%this.player.unmountImage(0);
+			%this.mountSch = %this.player.schedule(25, "mountImage", BlastImage, 0); //This is so fucking scuffed but it works. - Daniel
+		}
 		%emitter = (%this.usingSpecialBlast ? MBUUltraBlastEmitter : MBUBlastEmitter);
 		%this.transferParticles(%emitter, false, %gravity);
 	} else {
