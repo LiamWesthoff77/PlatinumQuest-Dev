@@ -190,10 +190,18 @@ function Mode_race::checkRaceShouldEnd(%this) {
 		return;
 
 	%finished = 0;
+	%active = 0;
 	%worstTime = -1;
 	%remaining = "";
 	for (%i = 0; %i < %count; %i ++) {
 		%client = ClientGroup.getObject(%i);
+		//A client still spectating and never having finished isn't actually
+		//racing (e.g. a late joiner who hasn't chosen to play yet) - don't
+		//let their stale clock count them as "the one player left" and end
+		//the race out from under them before they've even started
+		if (%client.spectating && !%client.raceFinished)
+			continue;
+		%active ++;
 		if (%client.raceFinished) {
 			%finished ++;
 			if (%client.raceFinishTime > %worstTime)
@@ -203,11 +211,14 @@ function Mode_race::checkRaceShouldEnd(%this) {
 		}
 	}
 
-	if (%finished >= %count) {
-		//Everyone's done
+	if (%active == 0)
+		return;
+
+	if (%finished >= %active) {
+		//Everyone still racing is done
 		$Game::FinishClient = %this.getRaceWinner();
 		endGameSetup();
-	} else if (%finished > 0 && %finished == (%count - 1) && isObject(%remaining) && %remaining.clockTime > %worstTime) {
+	} else if (%finished > 0 && %finished == (%active - 1) && isObject(%remaining) && %remaining.clockTime > %worstTime) {
 		//One player left, and their live time has passed even the worst
 		//finish time already on the board - there's no position left for
 		//them to improve on, so it's safe to end now instead of making
