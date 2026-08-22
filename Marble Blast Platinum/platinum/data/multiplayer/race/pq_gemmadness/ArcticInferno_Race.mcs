@@ -1,7 +1,7 @@
-﻿// 305 reds, 192 yellows, 50 blues, 16 platinums ->> 305/384/250/160 = 1099 max points
+// 305 reds, 192 yellows, 50 blues, 16 platinums ->> 305/384/250/160 = 1099 max points
 //--- INFO BEGIN ---
 //Mission information for the level select. Generated from the MissionInfo object except with extra goodies.
-function MP_PQ_ArcticInferno_GetMissionInfo() {
+function MP_PQ_ArcticInferno_Race_GetMissionInfo() {
 	return
 new ScriptObject() {
 		name = "Arctic Inferno";
@@ -196,7 +196,7 @@ package ArcticInferno {
 
 //--- SERVER PREMISSION SCRIPTS END ---
 //--- MISSION BEGIN ---
-function MP_PQ_ArcticInferno_LoadMission() {
+function MP_PQ_ArcticInferno_Race_LoadMission() {
 	return
 new SimGroup(MissionGroup) {
 

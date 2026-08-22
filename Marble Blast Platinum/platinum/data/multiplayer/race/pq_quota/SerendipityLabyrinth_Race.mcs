@@ -1,6 +1,6 @@
-﻿//--- INFO BEGIN ---
+//--- INFO BEGIN ---
 //Mission information for the level select. Generated from the MissionInfo object except with extra goodies.
-function MP_PQ_SerendipityLabyrinth_GetMissionInfo() {
+function MP_PQ_SerendipityLabyrinth_Race_GetMissionInfo() {
 	return
 new ScriptObject() {
 		name = "Serendipity Labyrinth";
@@ -55,7 +55,7 @@ if (!$Server::Hosting || $Server::_Dedicated) return;
 // because otherwise everyone needs to get <1 sec from my best
 //--- SERVER PREMISSION SCRIPTS END ---
 //--- MISSION BEGIN ---
-function MP_PQ_SerendipityLabyrinth_LoadMission() {
+function MP_PQ_SerendipityLabyrinth_Race_LoadMission() {
 	return
 new SimGroup(MissionGroup) {
 

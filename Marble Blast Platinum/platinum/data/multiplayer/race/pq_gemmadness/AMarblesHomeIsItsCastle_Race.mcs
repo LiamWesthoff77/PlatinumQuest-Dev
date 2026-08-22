@@ -1,6 +1,6 @@
-﻿//--- INFO BEGIN ---
+//--- INFO BEGIN ---
 //Mission information for the level select. Generated from the MissionInfo object except with extra goodies.
-function MP_PQ_AMarblesHomeIsItsCastle_GetMissionInfo() {
+function MP_PQ_AMarblesHomeIsItsCastle_Race_GetMissionInfo() {
 	return
 new ScriptObject() {
 		name = "A Marble\'s Home is Its Castle";
@@ -63,7 +63,7 @@ if (!$Server::Hosting || $Server::_Dedicated) return;
 
 //--- SERVER PREMISSION SCRIPTS END ---
 //--- MISSION BEGIN ---
-function MP_PQ_AMarblesHomeIsItsCastle_LoadMission() {
+function MP_PQ_AMarblesHomeIsItsCastle_Race_LoadMission() {
 	return
 new SimGroup(MissionGroup) {
 

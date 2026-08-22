@@ -1,6 +1,6 @@
-﻿//--- INFO BEGIN ---
+//--- INFO BEGIN ---
 //Mission information for the level select. Generated from the MissionInfo object except with extra goodies.
-function MP_PQ_PathFindingFolly_GetMissionInfo() {
+function MP_PQ_PathFindingFolly_Race_GetMissionInfo() {
 	return
 new ScriptObject() {
 		name = "Path Finding Folly";
@@ -51,7 +51,7 @@ if (!$Server::Hosting || $Server::_Dedicated) return;
 //DO NOT DELETE THIS LINE PathFindingFolly
 //--- SERVER PREMISSION SCRIPTS END ---
 //--- MISSION BEGIN ---
-function MP_PQ_PathFindingFolly_LoadMission() {
+function MP_PQ_PathFindingFolly_Race_LoadMission() {
 	return
 new SimGroup(MissionGroup) {
 

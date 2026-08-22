@@ -1,6 +1,6 @@
-﻿//--- INFO BEGIN ---
+//--- INFO BEGIN ---
 //Mission information for the level select. Generated from the MissionInfo object except with extra goodies.
-function MP_PQ_GunneryPractice_GetMissionInfo() {
+function MP_PQ_GunneryPractice_Race_GetMissionInfo() {
 	return
 new ScriptObject() {
 		name = "Gunnery Practice";
@@ -62,7 +62,7 @@ if (!$Server::Hosting || $Server::_Dedicated) return;
 //DO NOT DELETE THIS LINE GunneryPractice
 //--- SERVER PREMISSION SCRIPTS END ---
 //--- MISSION BEGIN ---
-function MP_PQ_GunneryPractice_LoadMission() {
+function MP_PQ_GunneryPractice_Race_LoadMission() {
 	return
 new SimGroup(MissionGroup) {
 
