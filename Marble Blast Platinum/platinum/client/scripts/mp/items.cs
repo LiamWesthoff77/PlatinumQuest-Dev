@@ -234,12 +234,29 @@ function ItemData::_getPowerUpId(%this) {
 	}
 }
 
+//The mode-specific shouldPickupItem/shouldIgnoreItem overrides (race, coop)
+//only exist on clients that have that mode's script loaded. This is the
+//fallback consulted when nothing overrides it - the one path a client
+//without those mode files still has - so it needs to know about every
+//item type a mode might tell the server to hand off to the client (see
+//shouldUseClientPowerups), not just the ones already here, or a stock
+//client can end up unable to pick anything up at all: the server skips
+//its own authoritative handling expecting the client to take it from
+//here, and the client has no local override to say yes.
 function isClientSidedItem(%item) {
 	switch$ (%item.getDataBlock().getName()) {
 	case
 		"AntiGravityItem" or "AntiGravityItem_PQ" or "AntiGravityItem_MBU" or
 		"NoRespawnAntiGravityItem" or "NoRespawnAntiGravityItem_PQ" or "NoRespawnAntiGravityItem_MBU" or
-		"AnvilItem": return true;
+		"AnvilItem" or
+		"SuperJumpItem" or "SuperJumpItem_PQ" or "SuperJumpItem_MBU" or "CustomSuperJumpItem_PQ" or
+		"SuperSpeedItem" or "SuperSpeedItem_PQ" or "SuperSpeedItem_MBU" or
+		"SuperBounceItem" or "SuperBounceItem_PQ" or
+		"ShockAbsorberItem" or "ShockAbsorberItem_PQ" or
+		"HelicopterItem" or "HelicopterItem_PQ" or "HelicopterItem_MBU" or
+		"MegaMarbleItem" or "MegaMarbleItem_MBU" or
+		"BlastItem" or "BlastItem_MBU" or
+		"TeleportItem" or "BubbleItem": return true;
 	}
 	return false;
 }
