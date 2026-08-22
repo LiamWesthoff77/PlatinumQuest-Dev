@@ -1,6 +1,6 @@
 ﻿//--- INFO BEGIN ---
 //Mission information for the level select. Generated from the MissionInfo later down in the file.
-function PQ_CornerConquest_GetMissionInfo() {
+function MP_PQ_CornerConquest_GetMissionInfo() {
 	return
 new ScriptObject() {
       name = "Corner Conquest";
@@ -51,7 +51,7 @@ if (!$Server::Hosting || $Server::_Dedicated) return;
 //
 //--- SERVER PREMISSION SCRIPTS END ---
 //--- MISSION BEGIN ---
-function PQ_CornerConquest_LoadMission() {
+function MP_PQ_CornerConquest_LoadMission() {
 	return
 new SimGroup(MissionGroup) {
 

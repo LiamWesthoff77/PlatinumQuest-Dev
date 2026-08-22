@@ -1,6 +1,6 @@
 ﻿//--- INFO BEGIN ---
 //Mission information for the level select. Generated from the MissionInfo object except with extra goodies.
-function PQ_Hydropower_GetMissionInfo() {
+function MP_PQ_Hydropower_GetMissionInfo() {
 	return
 new ScriptObject() {
 		name = "Hydropower";
@@ -67,7 +67,7 @@ if (!$Server::Hosting || $Server::_Dedicated) return;
 //Top crane is rotated 5.3 degrees.
 //--- SERVER PREMISSION SCRIPTS END ---
 //--- MISSION BEGIN ---
-function PQ_Hydropower_LoadMission() {
+function MP_PQ_Hydropower_LoadMission() {
 	return
 new SimGroup(MissionGroup) {
 

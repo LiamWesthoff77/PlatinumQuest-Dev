@@ -1,6 +1,6 @@
 ﻿//--- INFO BEGIN ---
 //Mission information for the level select. Generated from the MissionInfo object except with extra goodies.
-function PQ_LevelFromAForgivingMind_GetMissionInfo() {
+function MP_PQ_LevelFromAForgivingMind_GetMissionInfo() {
 	return
 new ScriptObject() {
 		name = "Level from a Forgiving Mind";
@@ -57,7 +57,7 @@ function MissionStartup()
 }
 //--- SERVER PREMISSION SCRIPTS END ---
 //--- MISSION BEGIN ---
-function PQ_LevelFromAForgivingMind_LoadMission() {
+function MP_PQ_LevelFromAForgivingMind_LoadMission() {
 	return
 new SimGroup(MissionGroup) {
 

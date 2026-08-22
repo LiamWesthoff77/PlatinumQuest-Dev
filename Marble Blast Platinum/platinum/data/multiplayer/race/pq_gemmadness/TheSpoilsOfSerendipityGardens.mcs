@@ -1,6 +1,6 @@
 ﻿//--- INFO BEGIN ---
 //Mission information for the level select. Generated from the MissionInfo object except with extra goodies.
-function PQ_TheSpoilsOfSerendipityGardens_GetMissionInfo() {
+function MP_PQ_TheSpoilsOfSerendipityGardens_GetMissionInfo() {
 	return
 new ScriptObject() {
 		name = "The Spoils of Serendipity Gardens";
@@ -78,7 +78,7 @@ if (!$Server::Hosting || $Server::_Dedicated) return;
 
 //--- SERVER PREMISSION SCRIPTS END ---
 //--- MISSION BEGIN ---
-function PQ_TheSpoilsOfSerendipityGardens_LoadMission() {
+function MP_PQ_TheSpoilsOfSerendipityGardens_LoadMission() {
 	return
 new SimGroup(MissionGroup) {
 

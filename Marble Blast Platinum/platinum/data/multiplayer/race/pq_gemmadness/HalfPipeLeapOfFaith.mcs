@@ -1,6 +1,6 @@
 ﻿//--- INFO BEGIN ---
 //Mission information for the level select. Generated from the MissionInfo object except with extra goodies.
-function PQ_HalfPipeLeapOfFaith_GetMissionInfo() {
+function MP_PQ_HalfPipeLeapOfFaith_GetMissionInfo() {
 	return
 new ScriptObject() {
 		name = "Half Pipe Leap of Faith";
@@ -61,7 +61,7 @@ if (!$Server::Hosting || $Server::_Dedicated) return;
 
 //--- SERVER PREMISSION SCRIPTS END ---
 //--- MISSION BEGIN ---
-function PQ_HalfPipeLeapOfFaith_LoadMission() {
+function MP_PQ_HalfPipeLeapOfFaith_LoadMission() {
 	return
 new SimGroup(MissionGroup) {
 

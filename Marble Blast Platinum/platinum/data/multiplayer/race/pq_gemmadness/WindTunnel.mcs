@@ -1,6 +1,6 @@
 ﻿//--- INFO BEGIN ---
 //Mission information for the level select. Generated from the MissionInfo later down in the file.
-function PQ_WindTunnel_GetMissionInfo() {
+function MP_PQ_WindTunnel_GetMissionInfo() {
 	return
 new ScriptObject() {
       name = "Wind Tunnel";
@@ -63,7 +63,7 @@ datablock StaticShapeData(PropLarge1 : Propeller)
 
 //--- SERVER PREMISSION SCRIPTS END ---
 //--- MISSION BEGIN ---
-function PQ_WindTunnel_LoadMission() {
+function MP_PQ_WindTunnel_LoadMission() {
 	return
 new SimGroup(MissionGroup) {
 
