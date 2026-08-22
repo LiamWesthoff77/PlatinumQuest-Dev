@@ -28,7 +28,13 @@ $RaceCoop::AddedFlag     = false; // guards against double-injection
 $RaceCoop::Games[0] = "gold"     TAB "Race (Gold)"     TAB "beginner intermediate advanced";
 $RaceCoop::Games[1] = "platinum" TAB "Race (Platinum)" TAB "beginner intermediate advanced expert";
 $RaceCoop::Games[2] = "ultra"    TAB "Race (Ultra)"    TAB "beginner intermediate advanced";
-$RaceCoop::GameCount = 3;
+$RaceCoop::Games[3] = "pq"       TAB "Race (PQ)"       TAB "quota gemmadness";
+$RaceCoop::GameCount = 4;
+
+// Difficulty folder ids don't always turn into a clean label via
+// upperFirst() alone (e.g. "gemmadness" -> "Gemmadness", not "Gem Madness") -
+// override those here, everything else still falls back to upperFirst()
+$RaceCoop::DifficultyDisplay["gemmadness"] = "Gem Madness";
 
 package RaceCoopMissions {
 
@@ -77,13 +83,17 @@ function addRaceCoopCategories() {
 			%diffId  = getWord(%difficulties, %d);
 			%dirName = $RaceCoop::BaseDirectory @ "/" @ %modId @ "_" @ %diffId;
 
+			%diffDisplay = $RaceCoop::DifficultyDisplay[%diffId];
+			if (%diffDisplay $= "")
+				%diffDisplay = upperFirst(%diffId);
+
 			// "Difficulty" bucket - is_local means the engine scans the
 			// directory directly for .mis files instead of expecting a
 			// server-sent mission list
 			RootGroup.add(%difficulty = new ScriptObject() {
 				id                  = %gameId @ upperFirst(%diffId);
 				name                = %diffId;
-				display             = upperFirst(%diffId);
+				display             = %diffDisplay;
 				directory           = %dirName;
 				bitmap_directory    = %dirName;
 				previews_directory  = %dirName;
