@@ -54,6 +54,8 @@ function Mode_race::onLoad(%this) {
 	%this.registerCallback("getQuickRespawnTimeout");
 	%this.registerCallback("shouldUseIndividualClocks");
 	%this.registerCallback("onFrameAdvance");
+	%this.registerCallback("onRespawnPlayer");
+	%this.registerCallback("onRespawnOnCheckpoint");
 	echo("[Mode" SPC %this.name @ "]: Loaded!");
 }
 function Mode_race::shouldUseIndividualClocks(%this) {
@@ -128,7 +130,7 @@ function Mode_race::onGameState(%this, %object) {
 		commandToClient(%object.client, 'SetGemQuota', $Game::GemCount, MissionInfo.GemQuota);
 }
 function Mode_race::onFoundGem(%this, %object) {
-	%required = (MissionInfo.GemQuota !$= "") ? MissionInfo.GemQuota : $Game::gemCount;
+	%required = (MissionInfo.GemQuota !$= "") ? MissionInfo.GemQuota : $Game::GemCount;
 	%remaining = %required - %object.client.getGemCount();
 	if (%remaining <= 0) {
 		messageClient(%object.client, 'MsgHaveAllGems', "\c0You have all the gems, head for the finish!");
@@ -141,6 +143,52 @@ function Mode_race::onFoundGem(%this, %object) {
 
 		messageClient(%object.client, 'MsgItemPickup', %msg, %remaining);
 		%object.client.playPitchedSound("gotDiamond");
+	}
+
+	//Record which checkpoint was active when this specific client picked up
+	//this specific gem - see restoreGemPickupState below for why race needs
+	//its own record of this instead of relying on the engine's shared
+	//per-object _pickUp/_pickUpCheckpoint fields (those can't represent one
+	//gem being independently owned by several different clients at once,
+	//which is exactly what race does).
+	%object.client._raceGemCheckpoint[%object.gem] = %object.client.curCheckpointNum;
+	%object.client._raceGemList[%object.client._raceGemListCount] = %object.gem;
+	%object.client._raceGemListCount ++;
+}
+
+//Race deliberately never hides a gem's server object once it's picked up
+//(see shouldPickupGem above) - each client is just told to hide it locally,
+//so every other racer can still independently collect the very same gem.
+//That collides with GameConnection::respawnObjects() (checkpoint.cs), which
+//every respawn calls (via restoreCheckpointGemCount's sibling cleanup) to
+//enforce the checkpoint gem-count rollback: it unconditionally clears this
+//client's ENTIRE gem pickup dedup history, not just the gems actually being
+//rolled back. In every other mode that's harmless, because an already-
+//picked-up gem is hidden (and so untouchable) server-side; in race it isn't,
+//so a gem picked up long before the checkpoint being returned to becomes
+//walkable and re-countable again - on top of whichever real gems are still
+//to find, gemCount can end up higher than the level's actual total (and a
+//player can reach a quota/finish without ever finding some of the real
+//gems). Restore the correct per-gem dedup state right after: still-spent
+//(gemCount only rolls back to the checkpoint's saved value, not to zero) for
+//anything picked up at or before this checkpoint, pickupable again only for
+//what was genuinely picked up after it.
+function Mode_race::onRespawnPlayer(%this, %object) {
+	%this.restoreGemPickupState(%object.client);
+}
+function Mode_race::onRespawnOnCheckpoint(%this, %object) {
+	%this.restoreGemPickupState(%object.client);
+}
+function Mode_race::restoreGemPickupState(%this, %client) {
+	if (MissionInfo.pqSourceMode $= "GemMadness")
+		return; //Gems are banked forever here - never rolled back to begin with
+
+	%count = %client._raceGemListCount;
+	for (%i = 0; %i < %count; %i ++) {
+		%gem = %client._raceGemList[%i];
+		if (!isObject(%gem))
+			continue;
+		%client.gemPickup[%gem] = (%client._raceGemCheckpoint[%gem] < %client.curCheckpointNum);
 	}
 }
 function Mode_race::shouldTotalGemCount(%this) {
@@ -337,6 +385,7 @@ function GameConnection::resetRaceStats(%this) {
 	%this.bonusTime = 0;
 	%this.totalBonus = 0;
 	%this.raceStartTime = %this.clockTime;
+	%this._raceGemListCount = 0;
 }
 
 //The game only ends once someone still racing can no longer affect the
