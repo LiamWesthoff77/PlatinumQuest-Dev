@@ -28,7 +28,7 @@ $RaceCoop::AddedFlag     = false; // guards against double-injection
 $RaceCoop::Games[0] = "gold"     TAB "Race (Gold)"     TAB "beginner intermediate advanced";
 $RaceCoop::Games[1] = "platinum" TAB "Race (Platinum)" TAB "beginner intermediate advanced expert";
 $RaceCoop::Games[2] = "ultra"    TAB "Race (Ultra)"    TAB "beginner intermediate advanced";
-$RaceCoop::Games[3] = "pq"       TAB "Race (PQ)"       TAB "quota gemmadness";
+$RaceCoop::Games[3] = "pq"       TAB "Race (PQ)"       TAB "tutorial beginner intermediate advanced expert quota gemmadness";
 $RaceCoop::GameCount = 4;
 
 // Difficulty folder ids don't always turn into a clean label via
