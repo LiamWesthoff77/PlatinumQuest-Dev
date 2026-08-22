@@ -155,7 +155,8 @@ function ClientMode_race::shouldIgnoreItem(%this, %object) {
 			"MegaMarbleItem" or "MegaMarbleItem_MBU" or
 			"BlastItem" or "BlastItem_MBU" or
 			"AntiGravityItem" or "AntiGravityItem_PQ" or "AntiGravityItem_MBU" or
-			"NoRespawnAntiGravityItem" or "NoRespawnAntiGravityItem_PQ" or "NoRespawnAntiGravityItem_MBU":
+			"NoRespawnAntiGravityItem" or "NoRespawnAntiGravityItem_PQ" or "NoRespawnAntiGravityItem_MBU" or
+			"TeleportItem" or "AnvilItem" or "BubbleItem":
 		//PowerUp
 		if (%object.this.respawning) {
 			return true;
@@ -181,7 +182,8 @@ function ClientMode_race::shouldPickupItem(%this, %object) {
 			"MegaMarbleItem" or "MegaMarbleItem_MBU" or
 			"BlastItem" or "BlastItem_MBU" or
 			"AntiGravityItem" or "AntiGravityItem_PQ" or "AntiGravityItem_MBU" or
-			"NoRespawnAntiGravityItem" or "NoRespawnAntiGravityItem_PQ" or "NoRespawnAntiGravityItem_MBU":
+			"NoRespawnAntiGravityItem" or "NoRespawnAntiGravityItem_PQ" or "NoRespawnAntiGravityItem_MBU" or
+			"TeleportItem" or "AnvilItem" or "BubbleItem":
 		//PowerUp
 		if (%object.this.respawning) {
 			return false;
