@@ -57,6 +57,7 @@ function ClientMode_race::onLoad(%this) {
 	%this.registerCallback("onMissionReset");
 	%this.registerCallback("shouldEnableBlast");
 	%this.registerCallback("shouldUpdateBlast");
+	%this.registerCallback("updateControls");
 	echo("[Mode" SPC %this.name @ " Client]: Loaded!");
 }
 //Blast is only available on Ultra race levels, never Gold/Platinum -
@@ -72,6 +73,50 @@ function ClientMode_race::shouldEnableBlast(%this) {
 //host, so that never reads "Ready" locally in a listen-served race.)
 function ClientMode_race::shouldUpdateBlast(%this) {
 	return shouldEnableBlast() && MPMyMarbleExists();
+}
+//PQ Gem Madness levels show a countdown from the level's original time
+//limit, matching how Gem Madness normally displays. The underlying clock
+//(PlayGui.currentTime) still counts up from 0 like every other race
+//level - that's what actually gets used for ranking - this only
+//overwrites the rendered digits afterward, purely cosmetic.
+function ClientMode_race::updateControls(%this) {
+	if (MissionInfo.pqSourceMode !$= "GemMadness")
+		return "";
+
+	%et = MissionInfo.time - PlayGui.currentTime;
+	if (%et < 0)
+		%et = 0;
+
+	%hundredth = div64_int(mod64_int(%et, 1000), 10);
+	%totalSeconds = div64_int(%et, 1000);
+	%seconds = mod64_int(%totalSeconds, 60);
+	%minutes = div64_int(sub64_int(%totalSeconds, %seconds), 60);
+
+	%secondsOne   = %seconds % 10;
+	%secondsTen   = (%seconds - %secondsOne) / 10;
+	%minutesOne   = %minutes % 10;
+	%minutesTen   = (%minutes - %minutesOne) / 10;
+	%hundredthOne = %hundredth % 10;
+	%hundredthTen = (%hundredth - %hundredthOne) / 10;
+
+	if ($pref::Thousandths) {
+		%thousandth = mod64_int(%et, 10);
+		Min_Ten_Th.setTimeNumber(%minutesTen);
+		Min_One_Th.setTimeNumber(%minutesOne);
+		Sec_Ten_Th.setTimeNumber(%secondsTen);
+		Sec_One_Th.setTimeNumber(%secondsOne);
+		Sec_Tenth_Th.setTimeNumber(%hundredthTen);
+		Sec_Hundredth_Th.setTimeNumber(%hundredthOne);
+		Sec_Thousandth_Th.setTimeNumber(%thousandth);
+	} else {
+		Min_Ten.setTimeNumber(%minutesTen);
+		Min_One.setTimeNumber(%minutesOne);
+		Sec_Ten.setTimeNumber(%secondsTen);
+		Sec_One.setTimeNumber(%secondsOne);
+		Sec_Tenth.setTimeNumber(%hundredthTen);
+		Sec_Hundredth.setTimeNumber(%hundredthOne);
+	}
+	return "";
 }
 function ClientMode_race::onMissionReset(%this) {
 	//Fresh attempt - claimed time items become pickupable (and visible)

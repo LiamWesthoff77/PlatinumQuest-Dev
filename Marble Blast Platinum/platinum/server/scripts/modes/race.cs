@@ -36,6 +36,7 @@ function Mode_race::onLoad(%this) {
 	%this.registerCallback("getMaxSpectators");
 	%this.registerCallback("canFinish");
 	%this.registerCallback("getFinishMessage");
+	%this.registerCallback("onGameState");
 	%this.registerCallback("shouldPickupGem");
 	%this.registerCallback("shouldPickupTimeItem");
 	%this.registerCallback("shouldPickupPowerUp");
@@ -116,6 +117,16 @@ function Mode_race::getFinishMessage(%this, %object) {
 		return "You may not finish without reaching the gem quota!";
 	return ""; //Quota met - fall through to the default "Congratulations!" message
 }
+//Drives the same client-side quota UI (PlayGui's main counter showing
+//quota as the denominator, plus the small "/total" GemsQuota label) that
+//Mode_quota normally uses - it's a plain global command, not routed
+//through the mode system, so race just needs to send it too. This also
+//doubles as the live standings' gem denominator, since it reads the same
+//PlayGui.maxGems field.
+function Mode_race::onGameState(%this, %object) {
+	if (MissionInfo.GemQuota !$= "")
+		commandToClient(%object.client, 'SetGemQuota', $Game::GemCount, MissionInfo.GemQuota);
+}
 function Mode_race::onFoundGem(%this, %object) {
 	%required = (MissionInfo.GemQuota !$= "") ? MissionInfo.GemQuota : $Game::gemCount;
 	%remaining = %required - %object.client.getGemCount();
@@ -148,6 +159,8 @@ function Mode_race::onMissionReset(%this) {
 		%client = ClientGroup.getObject(%i);
 		%client.resetRaceStats();
 	}
+	if (MissionInfo.GemQuota !$= "")
+		commandToAll('SetGemQuota', $Game::GemCount, MissionInfo.GemQuota);
 }
 function Mode_race::onClientLeaveGame(%this, %object) {
 	%count = ClientGroup.getCount();
