@@ -34,6 +34,8 @@ function Mode_race::onLoad(%this) {
 	%this.registerCallback("shouldUseUltraMarble");
 	%this.registerCallback("getUltraMarbleSize");
 	%this.registerCallback("getMaxSpectators");
+	%this.registerCallback("canFinish");
+	%this.registerCallback("getFinishMessage");
 	%this.registerCallback("shouldPickupGem");
 	%this.registerCallback("shouldPickupTimeItem");
 	%this.registerCallback("shouldPickupPowerUp");
@@ -99,8 +101,24 @@ function Mode_race::shouldResetGem(%this, %object) {
 	%object.obj.hide(false);
 	return true;
 }
+//PQ Quota levels only require MissionInfo.GemQuota gems to finish, not every
+//gem in the level - carry that rule over from Mode_quota so those levels
+//keep their original objective instead of race's usual "collect everything".
+function Mode_race::canFinish(%this, %object) {
+	if (MissionInfo.GemQuota !$= "")
+		return !($Game::GemCount && %object.client.getGemCount() < MissionInfo.GemQuota);
+	return !($Game::GemCount && %object.client.getGemCount() < $Game::GemCount);
+}
+function Mode_race::getFinishMessage(%this, %object) {
+	if (MissionInfo.GemQuota $= "")
+		return ""; //Not a quota level - fall back to the default message entirely
+	if ($Game::GemCount && %object.client.getGemCount() < MissionInfo.GemQuota)
+		return "You may not finish without reaching the gem quota!";
+	return ""; //Quota met - fall through to the default "Congratulations!" message
+}
 function Mode_race::onFoundGem(%this, %object) {
-	%remaining = $Game::gemCount - %object.client.getGemCount();
+	%required = (MissionInfo.GemQuota !$= "") ? MissionInfo.GemQuota : $Game::gemCount;
+	%remaining = %required - %object.client.getGemCount();
 	if (%remaining <= 0) {
 		messageClient(%object.client, 'MsgHaveAllGems', "\c0You have all the gems, head for the finish!");
 		%object.client.playPitchedSound("gotalldiamonds");

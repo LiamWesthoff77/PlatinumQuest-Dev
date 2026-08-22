@@ -1315,12 +1315,13 @@ function GameConnection::respawnPlayer(%this, %respawnPos) {
 		client = %this;
 		_delete = true;
 	});
-	if (%respawn && $Server::ServerType $= "MultiPlayer") {
+	//PQ Gem Madness levels keep gems banked forever once grabbed, even in
+	//race mode - don't roll them back or bring the gem objects back either
+	if (%respawn && $Server::ServerType $= "MultiPlayer" && MissionInfo.pqSourceMode !$= "GemMadness") {
 		%oldGemCount = %this.getGemCount();
 		%this.restoreCheckpointGemCount();
 
 		%lost = %oldGemCount - %this.getGemCount();
-		echo("[GemLoss] respawnPlayer:" SPC %this.getUsername() SPC "old=" @ %oldGemCount SPC "new=" @ %this.getGemCount() SPC "lost=" @ %lost SPC "index=" @ %this.index);
 		if (%lost > 0)
 			commandToAll('GemCountLoss', %this.index, %lost);
 
