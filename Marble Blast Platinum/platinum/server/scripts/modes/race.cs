@@ -161,6 +161,9 @@ function Mode_race::onMissionReset(%this) {
 	}
 	if (MissionInfo.GemQuota !$= "")
 		commandToAll('SetGemQuota', $Game::GemCount, MissionInfo.GemQuota);
+
+	%this.roundStartSimTime = getSimTime();
+	%this.gemMadnessTimeExpired = false;
 }
 function Mode_race::onClientLeaveGame(%this, %object) {
 	%count = ClientGroup.getCount();
@@ -211,6 +214,20 @@ function Mode_race::onEnterPad(%this, %object) {
 function Mode_race::onFrameAdvance(%this, %delta) {
 	if ($Game::Finished)
 		return;
+
+	//PQ Gem Madness levels have a real time limit - unlike normal race
+	//levels, which just wait for everyone to finish. Once it runs out, end
+	//the round; whoever hasn't finished yet gets scored by gem count
+	//instead of DNF (see onEndGameSetup/getFinalScore), matching how the
+	//original Gem Madness mode falls back when time expires.
+	if (!%this.gemMadnessTimeExpired && MissionInfo.pqSourceMode $= "GemMadness" && MissionInfo.time !$= ""
+			&& (getSimTime() - %this.roundStartSimTime) >= MissionInfo.time) {
+		%this.gemMadnessTimeExpired = true;
+		$Game::FinishClient = %this.getRaceWinner();
+		endGameSetup();
+		return;
+	}
+
 	%this.checkRaceShouldEnd();
 }
 function Mode_race::checkRaceShouldEnd(%this) {
@@ -286,6 +303,15 @@ function Mode_race::getScoreType(%this) {
 function Mode_race::getFinalScore(%this, %object) {
 	if (%object.client.raceFinished)
 		return $ScoreType::Time TAB %object.client.raceFinishTime;
+	if (%object.client.raceScoredByGems)
+		//PQ Gem Madness time ran out before they finished - score them by
+		//gem count instead, like the original mode's own time-expiry
+		//fallback. Everything here shares one $ScoreType::Time value space
+		//(the standings/end-game UI only support one score type per round),
+		//so this sits below the DNF sentinel but above any real finish time
+		//(capped well under 6000000 by the clock's own max), and more gems
+		//sorts better (lower) within that band.
+		return $ScoreType::Time TAB (10000000 - %object.client.getGemCount());
 	if (%object.client.raceDNF)
 		//Sorts after every real finish time (which is capped well below this
 		//by the clock's own 5999999 max), without colliding with the
@@ -305,6 +331,7 @@ function GameConnection::resetRaceStats(%this) {
 	%this.raceFinished = false;
 	%this.raceFinishTime = -1;
 	%this.raceDNF = false;
+	%this.raceScoredByGems = false;
 	%this.racePlace = 0;
 	%this.clockTime = 0;
 	%this.bonusTime = 0;
@@ -321,8 +348,12 @@ function Mode_race::onEndGameSetup(%this) {
 	%count = ClientGroup.getCount();
 	for (%i = 0; %i < %count; %i ++) {
 		%client = ClientGroup.getObject(%i);
-		if (!%client.raceFinished)
-			%client.raceDNF = true;
+		if (!%client.raceFinished) {
+			if (%this.gemMadnessTimeExpired)
+				%client.raceScoredByGems = true;
+			else
+				%client.raceDNF = true;
+		}
 	}
 
 	%this.announceFinalStandings();
@@ -350,7 +381,7 @@ function Mode_race::announceFinalStandings(%this) {
 			//Must be strictly less than %bestTime's own seed value below, or a
 			//DNF never wins the "< %bestTime" check once it's the only
 			//candidate left and silently drops out of the recap
-			%time = %client.raceDNF ? 99999999 : %client.raceFinishTime;
+			%time = %client.raceDNF ? 99999999 : (%client.raceScoredByGems ? (10000000 - %client.getGemCount()) : %client.raceFinishTime);
 			if (%time < %bestTime) {
 				%bestTime = %time;
 				%bestClient = %client;
@@ -364,6 +395,8 @@ function Mode_race::announceFinalStandings(%this) {
 
 		if (%bestClient.raceDNF)
 			serverSendChat(%rank @ ". " @ %bestClient.getDisplayName() @ " (DNF)");
+		else if (%bestClient.raceScoredByGems)
+			serverSendChat(%rank @ ". " @ %bestClient.getDisplayName() @ " (" @ %bestClient.getGemCount() @ "/" @ $Game::GemCount @ " gems)");
 		else
 			serverSendChat(%rank @ ". " @ %bestClient.getDisplayName() @ " (" @ formatTime(%bestClient.raceFinishTime) @ ")");
 	}

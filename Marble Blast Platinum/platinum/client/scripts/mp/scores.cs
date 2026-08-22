@@ -74,6 +74,7 @@ function clientCmdScoreListPlayer(%list) {
 		%gemCount = getField(%record, 8);
 		%oobCount = getField(%record, 9);
 		%dnf = getField(%record, 10);
+		%scoredByGems = getField(%record, 11);
 
 		%obj = new ScriptObject() {
 			name = %name;
@@ -87,6 +88,7 @@ function clientCmdScoreListPlayer(%list) {
 			gemCount = %gemCount;
 			oobCount = %oobCount;
 			dnf = %dnf;
+			scoredByGems = %scoredByGems;
 			oobFlash = false;
 		};
 		ScoreObjectGroup.add(%obj);
@@ -98,7 +100,7 @@ function clientCmdScoreListPlayer(%list) {
 	scoreListUpdate();
 }
 
-function clientCmdScoreListUpdate(%index, %score, %gems, %bonus, %scoreType, %pendingBonus, %gemCount, %oobCount, %dnf) {
+function clientCmdScoreListUpdate(%index, %score, %gems, %bonus, %scoreType, %pendingBonus, %gemCount, %oobCount, %dnf, %scoredByGems) {
 	//Delete all player objects in the list
 	%player = ScoreList.player[%index];
 	if (!isObject(%player))
@@ -111,6 +113,7 @@ function clientCmdScoreListUpdate(%index, %score, %gems, %bonus, %scoreType, %pe
 	%player.gemCount = %gemCount;
 	%player.oobCount = %oobCount;
 	%player.dnf = %dnf;
+	%player.scoredByGems = %scoredByGems;
 
 	scoreListUpdate();
 }
@@ -726,6 +729,7 @@ function scoreListUpdate() {
 			%pendingBonus = ScoreList.getEntry(%bestIdx).pendingBonus;
 			%gemCount = ScoreList.getEntry(%bestIdx).gemCount;
 			%dnf = ScoreList.getEntry(%bestIdx).dnf;
+			%scoredByGems = ScoreList.getEntry(%bestIdx).scoredByGems;
 			%oobFlash = ScoreList.getEntry(%bestIdx).oobFlash;
 			%state  = isObject(PlayerList) ? PlayerList.getEntryByVariable("name", %player).specState : 0;
 			%ping   = isObject(PlayerList) ? PlayerList.getEntryByVariable("name", %player).ping : 0;
@@ -939,6 +943,8 @@ function scoreListUpdate() {
 
 			if (%timeMode && %dnf)
 				%displayScore = "DNF";
+			else if (%timeMode && %scoredByGems)
+				%displayScore = %gemCount @ "/" @ PlayGui.maxGems;
 			else
 				%displayScore = %timeMode ? formatTime(%score) : %score;
 
