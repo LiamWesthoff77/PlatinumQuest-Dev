@@ -950,7 +950,7 @@ new SimGroup(MissionGroup) {
 		position = "-7.25 61 7.25";
 		rotation = "0 1 0 90";
 		scale = "1 1 1";
-		dataBlock = "NoRespawnAntiGravityItem_PQ";
+		dataBlock = "NoRespawnAntiGravityItem";
 		collideable = "0";
 		static = "1";
 		rotate = "1";
@@ -959,7 +959,7 @@ new SimGroup(MissionGroup) {
 		position = "-4.7 57 4.5";
 		rotation = "0 -1 0 90";
 		scale = "1 1 1";
-		dataBlock = "NoRespawnAntiGravityItem_PQ";
+		dataBlock = "NoRespawnAntiGravityItem";
 		collideable = "0";
 		static = "1";
 		rotate = "1";
@@ -968,7 +968,7 @@ new SimGroup(MissionGroup) {
 		position = "-4.45 61 7.25";
 		rotation = "1 0 0 0";
 		scale = "1 1 1";
-		dataBlock = "NoRespawnAntiGravityItem_PQ";
+		dataBlock = "NoRespawnAntiGravityItem";
 		collideable = "0";
 		static = "1";
 		rotate = "1";
@@ -977,7 +977,7 @@ new SimGroup(MissionGroup) {
 		position = "-7.5 57 4.75";
 		rotation = "1 0 0 180";
 		scale = "1 1 1";
-		dataBlock = "NoRespawnAntiGravityItem_PQ";
+		dataBlock = "NoRespawnAntiGravityItem";
 		collideable = "0";
 		static = "1";
 		rotate = "1";

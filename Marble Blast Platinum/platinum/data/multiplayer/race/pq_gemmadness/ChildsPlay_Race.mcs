@@ -711,7 +711,7 @@ new SimGroup(MissionGroup) {
 			position = "-16 3 9.15";
 			rotation = "0.992809 0 0.119712 180";
 			scale = "0.5 0.5 0.5";
-			dataBlock = "AntiGravityItem_PQ";
+			dataBlock = "AntiGravityItem";
 			collideable = "0";
 			static = "1";
 			rotate = "1";
@@ -720,7 +720,7 @@ new SimGroup(MissionGroup) {
 			position = "-13 1 9.15";
 			rotation = "0.992809 0 0.119712 180";
 			scale = "0.5 0.5 0.5";
-			dataBlock = "AntiGravityItem_PQ";
+			dataBlock = "AntiGravityItem";
 			collideable = "0";
 			static = "1";
 			rotate = "1";
@@ -729,7 +729,7 @@ new SimGroup(MissionGroup) {
 			position = "-11.5 1 9.15";
 			rotation = "1 0 0 180";
 			scale = "0.5 0.5 0.5";
-			dataBlock = "AntiGravityItem_PQ";
+			dataBlock = "AntiGravityItem";
 			collideable = "0";
 			static = "1";
 			rotate = "1";
@@ -738,7 +738,7 @@ new SimGroup(MissionGroup) {
 			position = "-9.5 7 9.15";
 			rotation = "1 0 0 200";
 			scale = "0.5 0.5 0.5";
-			dataBlock = "AntiGravityItem_PQ";
+			dataBlock = "AntiGravityItem";
 			collideable = "0";
 			static = "1";
 			rotate = "1";
@@ -747,7 +747,7 @@ new SimGroup(MissionGroup) {
 			position = "-15 6.5 9.15";
 			rotation = "1 0 0 160";
 			scale = "0.5 0.5 0.5";
-			dataBlock = "AntiGravityItem_PQ";
+			dataBlock = "AntiGravityItem";
 			collideable = "0";
 			static = "1";
 			rotate = "1";
@@ -756,7 +756,7 @@ new SimGroup(MissionGroup) {
 			position = "-11 7 9.15";
 			rotation = "0.993956 0 -0.109778 180";
 			scale = "0.5 0.5 0.5";
-			dataBlock = "AntiGravityItem_PQ";
+			dataBlock = "AntiGravityItem";
 			collideable = "0";
 			static = "1";
 			rotate = "1";
@@ -765,7 +765,7 @@ new SimGroup(MissionGroup) {
 			position = "-15 11 9.15";
 			rotation = "0.993956 0 -0.109778 180";
 			scale = "0.5 0.5 0.5";
-			dataBlock = "AntiGravityItem_PQ";
+			dataBlock = "AntiGravityItem";
 			collideable = "0";
 			static = "1";
 			rotate = "1";
@@ -774,7 +774,7 @@ new SimGroup(MissionGroup) {
 			position = "-6 15 9.15";
 			rotation = "1 0 0 180";
 			scale = "0.5 0.5 0.5";
-			dataBlock = "AntiGravityItem_PQ";
+			dataBlock = "AntiGravityItem";
 			collideable = "0";
 			static = "1";
 			rotate = "1";
@@ -783,7 +783,7 @@ new SimGroup(MissionGroup) {
 			position = "-7 14 9.15";
 			rotation = "1 0 0 200";
 			scale = "0.5 0.5 0.5";
-			dataBlock = "AntiGravityItem_PQ";
+			dataBlock = "AntiGravityItem";
 			collideable = "0";
 			static = "1";
 			rotate = "1";
@@ -792,7 +792,7 @@ new SimGroup(MissionGroup) {
 			position = "23.5 2.75 5.9";
 			rotation = "1 0 0 0";
 			scale = "3 3 3";
-			dataBlock = "SuperBounceItem_PQ";
+			dataBlock = "SuperBounceItem";
 			collideable = "0";
 			static = "1";
 			rotate = "1";

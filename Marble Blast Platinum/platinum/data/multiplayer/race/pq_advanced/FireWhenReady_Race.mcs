@@ -969,7 +969,7 @@ new SimGroup(MissionGroup) {
 			position = "90.3775 12 4.0007";
 			rotation = "1 0 0 0";
 			scale = "1 1 1";
-			dataBlock = "SuperBounceItem_PQ";
+			dataBlock = "SuperBounceItem";
 			collideable = "0";
 			static = "1";
 			rotate = "1";

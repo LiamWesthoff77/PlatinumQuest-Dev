@@ -542,7 +542,7 @@ new SimGroup(MissionGroup) {
 			position = "28.1481 27.4284 19.729";
 			rotation = "1 0 0 0";
 			scale = "1 1 1";
-			dataBlock = "ShockAbsorberItem_PQ";
+			dataBlock = "ShockAbsorberItem";
 			collideable = "0";
 			static = "1";
 			rotate = "1";
@@ -571,7 +571,7 @@ new SimGroup(MissionGroup) {
 			position = "13.1861 40.6106 35.7329";
 			rotation = "1 0 0 0";
 			scale = "1 1 1";
-			dataBlock = "SuperJumpItem_PQ";
+			dataBlock = "SuperJumpItem";
 			collideable = "0";
 			static = "1";
 			rotate = "1";

@@ -66,7 +66,7 @@ new SimGroup(MissionGroup) {
          position = "17.6157 1.95192 -74.2156";
          rotation = "1 0 0 0";
          scale = "2 2 2";
-         dataBlock = "SuperJumpItem_PQ";
+         dataBlock = "SuperJumpItem";
          collideable = "0";
          static = "1";
          rotate = "1";
@@ -75,7 +75,7 @@ new SimGroup(MissionGroup) {
          position = "26.4794 1.74974 -74.208";
          rotation = "1 0 0 0";
          scale = "2 2 2";
-         dataBlock = "SuperJumpItem_PQ";
+         dataBlock = "SuperJumpItem";
          collideable = "0";
          static = "1";
          rotate = "1";
@@ -103,7 +103,7 @@ new SimGroup(MissionGroup) {
          position = "-22.0613 -9.67665 -35.8753";
          rotation = "1 0 0 0";
          scale = "2 2 2";
-         dataBlock = "SuperJumpItem_PQ";
+         dataBlock = "SuperJumpItem";
          collideable = "0";
          static = "1";
          rotate = "1";
@@ -112,7 +112,7 @@ new SimGroup(MissionGroup) {
          position = "-29.8642 9.38398 -34.4084";
          rotation = "1 0 0 0";
          scale = "2 2 2";
-         dataBlock = "SuperJumpItem_PQ";
+         dataBlock = "SuperJumpItem";
          collideable = "0";
          static = "1";
          rotate = "1";
@@ -121,7 +121,7 @@ new SimGroup(MissionGroup) {
          position = "-20.2552 16.2173 -26.3251";
          rotation = "1 0 0 0";
          scale = "2 2 2";
-         dataBlock = "SuperJumpItem_PQ";
+         dataBlock = "SuperJumpItem";
          collideable = "0";
          static = "1";
          rotate = "1";
@@ -130,7 +130,7 @@ new SimGroup(MissionGroup) {
          position = "-9.52778 -10.5433 1.13224";
          rotation = "1 0 0 0";
          scale = "2 2 2";
-         dataBlock = "SuperJumpItem_PQ";
+         dataBlock = "SuperJumpItem";
          collideable = "0";
          static = "1";
          rotate = "1";
@@ -139,7 +139,7 @@ new SimGroup(MissionGroup) {
          position = "2.92041 -3.91185 -4.15324";
          rotation = "1 0 0 0";
          scale = "2 2 2";
-         dataBlock = "SuperJumpItem_PQ";
+         dataBlock = "SuperJumpItem";
          collideable = "0";
          static = "1";
          rotate = "1";
@@ -148,7 +148,7 @@ new SimGroup(MissionGroup) {
          position = "15.9563 -10.9247 -22.2246";
          rotation = "1 0 0 0";
          scale = "2 2 2";
-         dataBlock = "SuperJumpItem_PQ";
+         dataBlock = "SuperJumpItem";
          collideable = "0";
          static = "1";
          rotate = "1";
@@ -157,7 +157,7 @@ new SimGroup(MissionGroup) {
          position = "11.1544 -17.8872 -42.9319";
          rotation = "1 0 0 0";
          scale = "2 2 2";
-         dataBlock = "SuperJumpItem_PQ";
+         dataBlock = "SuperJumpItem";
          collideable = "0";
          static = "1";
          rotate = "1";
@@ -166,7 +166,7 @@ new SimGroup(MissionGroup) {
          position = "-4.93582 -13.9107 -28.7067";
          rotation = "1 0 0 0";
          scale = "2 2 2";
-         dataBlock = "SuperJumpItem_PQ";
+         dataBlock = "SuperJumpItem";
          collideable = "0";
          static = "1";
          rotate = "1";

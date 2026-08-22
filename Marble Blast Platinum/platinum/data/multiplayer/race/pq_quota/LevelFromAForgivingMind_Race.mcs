@@ -839,7 +839,7 @@ new SimGroup(MissionGroup) {
 			position = "59 21 12.5";
 			rotation = "1 0 0 0";
 			scale = "1 1 1";
-			dataBlock = "SuperBounceItem_PQ";
+			dataBlock = "SuperBounceItem";
 			collideable = "0";
 			static = "1";
 			rotate = "1";
@@ -848,7 +848,7 @@ new SimGroup(MissionGroup) {
 			position = "59 -9 8.5";
 			rotation = "1 0 0 0";
 			scale = "1 1 1";
-			dataBlock = "SuperBounceItem_PQ";
+			dataBlock = "SuperBounceItem";
 			collideable = "0";
 			static = "1";
 			rotate = "1";
@@ -937,7 +937,7 @@ new SimGroup(MissionGroup) {
 			position = "24 -36 7.5";
 			rotation = "0 1 0 90";
 			scale = "1 1 1";
-			dataBlock = "AntiGravityItem_PQ";
+			dataBlock = "AntiGravityItem";
 			collideable = "0";
 			static = "1";
 			rotate = "1";

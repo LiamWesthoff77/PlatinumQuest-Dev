@@ -171,7 +171,7 @@ new SimGroup(MissionGroup) {
 			position = "22.3175 -0.417039 -12.271";
 			rotation = "1 0 0 0";
 			scale = "1 1 1";
-			dataBlock = "SuperJumpItem_PQ";
+			dataBlock = "SuperJumpItem";
 			collideable = "0";
 			static = "1";
 			rotate = "1";

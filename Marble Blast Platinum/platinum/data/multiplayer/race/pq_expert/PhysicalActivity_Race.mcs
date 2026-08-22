@@ -990,7 +990,7 @@ new SimGroup(MissionGroup) {
 			position = "5.5 -3 107.25";
 			rotation = "1 0 0 0";
 			scale = "2.5 2.5 2.5";
-			dataBlock = "ShockAbsorberItem_PQ";
+			dataBlock = "ShockAbsorberItem";
 			collideable = "0";
 			static = "1";
 			rotate = "1";

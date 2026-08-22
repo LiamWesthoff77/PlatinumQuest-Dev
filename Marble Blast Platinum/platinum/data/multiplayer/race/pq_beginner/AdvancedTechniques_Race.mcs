@@ -809,7 +809,7 @@ new SimGroup(MissionGroup) {
 		position = "-59 3 0.5";
 		rotation = "1 0 0 0";
 		scale = "1 1 1";
-		dataBlock = "ShockAbsorberItem_PQ";
+		dataBlock = "ShockAbsorberItem";
 		collideable = "0";
 		static = "1";
 		rotate = "1";

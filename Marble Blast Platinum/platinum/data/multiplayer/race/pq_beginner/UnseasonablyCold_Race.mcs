@@ -723,7 +723,7 @@ new SimGroup(MissionGroup) {
 		position = "-20 54 21.5";
 		rotation = "1 0 0 0";
 		scale = "1 1 1";
-		dataBlock = "SuperSpeedItem_PQ";
+		dataBlock = "SuperSpeedItem";
 		collideable = "0";
 		static = "1";
 		rotate = "0";
