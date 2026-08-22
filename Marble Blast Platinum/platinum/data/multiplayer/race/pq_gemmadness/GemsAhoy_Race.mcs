@@ -1,6 +1,6 @@
 //--- INFO BEGIN ---
 //Mission information for the level select. Generated from the MissionInfo object except with extra goodies.
-function MP_PQ_GemsAhoy_Race_GetMissionInfo() {
+function MP_PQ_GemsAhoyRace_GetMissionInfo() {
 	return
 new ScriptObject() {
 		name = "Gems Ahoy!";
@@ -60,7 +60,7 @@ if (!$Server::Hosting || $Server::_Dedicated) return;
 
 //--- SERVER PREMISSION SCRIPTS END ---
 //--- MISSION BEGIN ---
-function MP_PQ_GemsAhoy_Race_LoadMission() {
+function MP_PQ_GemsAhoyRace_LoadMission() {
 	return
 new SimGroup(MissionGroup) {
 

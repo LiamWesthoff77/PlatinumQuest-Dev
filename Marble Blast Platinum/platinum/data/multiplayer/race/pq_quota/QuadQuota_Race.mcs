@@ -1,6 +1,6 @@
 //--- INFO BEGIN ---
 //Mission information for the level select. Generated from the MissionInfo later down in the file.
-function MP_PQ_QuadQuota_Race_GetMissionInfo() {
+function MP_PQ_QuadQuotaRace_GetMissionInfo() {
 	return
 new ScriptObject() {
       name = "Quad Quota";
@@ -44,7 +44,7 @@ if (!$Server::Hosting || $Server::_Dedicated) return;
 //DO NOT DELETE THIS LINE QuadQuota
 //--- SERVER PREMISSION SCRIPTS END ---
 //--- MISSION BEGIN ---
-function MP_PQ_QuadQuota_Race_LoadMission() {
+function MP_PQ_QuadQuotaRace_LoadMission() {
 	return
 new SimGroup(MissionGroup) {
 

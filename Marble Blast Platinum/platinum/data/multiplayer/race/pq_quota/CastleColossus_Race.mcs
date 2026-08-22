@@ -1,6 +1,6 @@
 //--- INFO BEGIN ---
 //Mission information for the level select. Generated from the MissionInfo object except with extra goodies.
-function MP_PQ_CastleColossus_Race_GetMissionInfo() {
+function MP_PQ_CastleColossusRace_GetMissionInfo() {
 	return
 new ScriptObject() {
 		name = "Castle Colossus";
@@ -58,7 +58,7 @@ if (!$Server::Hosting || $Server::_Dedicated) return;
 //DO NOT DELETE THIS LINE CastleColossus
 //--- SERVER PREMISSION SCRIPTS END ---
 //--- MISSION BEGIN ---
-function MP_PQ_CastleColossus_Race_LoadMission() {
+function MP_PQ_CastleColossusRace_LoadMission() {
 	return
 new SimGroup(MissionGroup) {
 
