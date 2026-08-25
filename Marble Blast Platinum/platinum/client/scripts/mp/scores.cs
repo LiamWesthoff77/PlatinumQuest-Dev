@@ -693,13 +693,18 @@ function scoreListUpdate() {
 		%players = $MP::ScorePlayers;
 		%rowIdx = 0;
 
-		//Time-scored modes (e.g. race) rank lowest-first, everything else highest-first
+		//Time-scored modes (e.g. race) rank by gem count first (most gems
+		//first), falling back to lowest-time as a tiebreaker - this settles
+		//into a pure time ranking once everyone's converged on the same gem
+		//count, which is exactly what the final standings should look like.
+		//Everything else (e.g. Hunt) just ranks highest-score-first.
 		%timeMode = (%players > 0) && (ScoreList.getEntry(0).scoreType == $ScoreType::Time);
 
 		// Sort it!
 		%used = Array(ScoresUsedPlayersArray);
 		for (%i = 0; %i < %players; %i ++) {
 			%bestScore = %timeMode ? 999999999 : -9999;
+			%bestGems = -1;
 			%bestIdx = -1;
 			for (%j = 0; %j < %players; %j ++) {
 				%player = ScoreList.getEntry(%j).name;
@@ -707,8 +712,10 @@ function scoreListUpdate() {
 				if (%used.containsEntry(%player))
 					continue;
 				if (%timeMode) {
-					if (%score < %bestScore) {
+					%gemCountJ = ScoreList.getEntry(%j).gemCount;
+					if (%bestIdx == -1 || %gemCountJ > %bestGems || (%gemCountJ == %bestGems && %score < %bestScore)) {
 						%bestScore = %score;
+						%bestGems = %gemCountJ;
 						%bestIdx = %j;
 					} else
 						continue;

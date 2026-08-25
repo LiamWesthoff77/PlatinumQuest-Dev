@@ -678,7 +678,18 @@ function GameConnection::stateEnd(%this) {
 function GameConnection::incBonusTime(%this,%dt) {
 	if (shouldUseIndividualClocks()) {
 		//Only this client's own clock is affected; no global broadcast
-		%this.bonusTime += %dt;
+		if (%dt < 0) {
+			//Penalties have no pool to spend down over time like a positive
+			//bonus does - apply them immediately instead of feeding a
+			//negative value into bonusTime, which advanceClock's spend-down
+			//loop (mp/time.cs) assumes is always >= 0.
+			%this.totalBonus += %dt;
+			%this.clockTime = add64_int(%this.clockTime, -%dt);
+			if (%this.clockTime > 5999999)
+				%this.clockTime = 5999999;
+		} else {
+			%this.bonusTime += %dt;
+		}
 		%this.syncClock();
 		return;
 	}

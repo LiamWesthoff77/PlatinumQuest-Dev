@@ -125,7 +125,11 @@ function Time::advance(%delta) {
 //their own end conditions (e.g. race uses the finish pad), so unlike the
 //shared clock this never ends the game on its own.
 function GameConnection::advanceClock(%this, %delta, %mult) {
-	if (%this.bonusTime != 0) {
+	// Only a positive bonusTime is a "pool" to spend down over time; negative
+	// deltas (penalties) are applied immediately in incBonusTime and should
+	// never reach bonusTime, but guard against != 0 dragging a negative
+	// value through this loop's math regardless.
+	if (%this.bonusTime > 0) {
 		if (%this.bonusTime > %delta) {
 			%this.totalBonus += %delta;
 			%this.bonusTime -= %delta;

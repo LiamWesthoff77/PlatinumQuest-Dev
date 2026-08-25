@@ -312,6 +312,14 @@ useUltraMarble = "1";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            msToNext = "8000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "-20 -22 -24";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
             msToNext = "4500";
             smoothingType = "Accelerate";
          };
@@ -319,7 +327,7 @@ useUltraMarble = "1";
             position = "-20 6 -24";
             rotation = "1 0 0 0";
             scale = "1 1 1";
-            seqNum = "2";
+            seqNum = "3";
             msToNext = "2000";
             smoothingType = "Accelerate";
          };
@@ -327,7 +335,7 @@ useUltraMarble = "1";
             position = "-20.25 6 -16";
             rotation = "1 0 0 0";
             scale = "1 1 1";
-            seqNum = "3";
+            seqNum = "4";
             msToNext = "3000";
             smoothingType = "Accelerate";
          };
@@ -335,7 +343,7 @@ useUltraMarble = "1";
             position = "-20 22 -16";
             rotation = "1 0 0 0";
             scale = "1 1 1";
-            seqNum = "4";
+            seqNum = "5";
             msToNext = "4000";
             smoothingType = "Accelerate";
          };
@@ -343,7 +351,7 @@ useUltraMarble = "1";
             position = "12 22 -16";
             rotation = "1 0 0 0";
             scale = "1 1 1";
-            seqNum = "5";
+            seqNum = "6";
             msToNext = "3000";
             smoothingType = "Accelerate";
          };
@@ -351,7 +359,7 @@ useUltraMarble = "1";
             position = "12 6 -16";
             rotation = "1 0 0 0";
             scale = "1 1 1";
-            seqNum = "6";
+            seqNum = "7";
             msToNext = "3000";
             smoothingType = "Accelerate";
          };
@@ -359,7 +367,7 @@ useUltraMarble = "1";
             position = "28 6 -16";
             rotation = "1 0 0 0";
             scale = "1 1 1";
-            seqNum = "7";
+            seqNum = "8";
             msToNext = "3000";
             smoothingType = "Accelerate";
          };
@@ -367,7 +375,7 @@ useUltraMarble = "1";
             position = "28 -10 -16";
             rotation = "1 0 0 0";
             scale = "1 1 1";
-            seqNum = "8";
+            seqNum = "9";
             msToNext = "3000";
             smoothingType = "Accelerate";
          };
@@ -375,7 +383,7 @@ useUltraMarble = "1";
             position = "12 -10 -16";
             rotation = "1 0 0 0";
             scale = "1 1 1";
-            seqNum = "9";
+            seqNum = "10";
             msToNext = "4000";
             smoothingType = "Accelerate";
          };
@@ -383,7 +391,7 @@ useUltraMarble = "1";
             position = "12 -10 0";
             rotation = "1 0 0 0";
             scale = "1 1 1";
-            seqNum = "10";
+            seqNum = "11";
             msToNext = "3000";
             smoothingType = "Accelerate";
          };
@@ -391,7 +399,7 @@ useUltraMarble = "1";
             position = "-4 -10 0";
             rotation = "1 0 0 0";
             scale = "1 1 1";
-            seqNum = "11";
+            seqNum = "12";
             msToNext = "3000";
             smoothingType = "Accelerate";
          };
@@ -399,7 +407,7 @@ useUltraMarble = "1";
             position = "-4 -26 8";
             rotation = "1 0 0 0";
             scale = "1 1 1";
-            seqNum = "12";
+            seqNum = "13";
             msToNext = "4000";
             smoothingType = "Accelerate";
          };
@@ -407,7 +415,7 @@ useUltraMarble = "1";
             position = "20 -26 8";
             rotation = "1 0 0 0";
             scale = "1 1 1";
-            seqNum = "13";
+            seqNum = "14";
             msToNext = "2000";
             smoothingType = "Accelerate";
          };
@@ -415,7 +423,7 @@ useUltraMarble = "1";
             position = "20 -16 8";
             rotation = "1 0 0 0";
             scale = "1 1 1";
-            seqNum = "14";
+            seqNum = "15";
             msToNext = "8000";
             smoothingType = "Accelerate";
          };
@@ -423,7 +431,7 @@ useUltraMarble = "1";
             position = "20 -16 25";
             rotation = "1 0 0 0";
             scale = "1 1 1";
-            seqNum = "15";
+            seqNum = "16";
             msToNext = "10000";
             smoothingType = "Accelerate";
          };
@@ -431,7 +439,7 @@ useUltraMarble = "1";
             position = "-27.5 -16 25";
             rotation = "1 0 0 0";
             scale = "1 1 1";
-            seqNum = "16";
+            seqNum = "17";
             msToNext = "2000";
             smoothingType = "Accelerate";
          };
@@ -439,20 +447,10 @@ useUltraMarble = "1";
             position = "-20 -22 -24";
             rotation = "1 0 0 0";
             scale = "1 1 1";
-            seqNum = "17";
+            seqNum = "18";
             msToNext = "1000";
             smoothingType = "Linear";
          };
-      };
-      new Trigger(MustChange) {
-         position = "-19.25 -22 -22.75";
-         rotation = "1 0 0 0";
-         scale = "1 1 1";
-         dataBlock = "TriggerGotoTarget";
-         polyhedron = "-3.2500000 -4.0000000 1.2500000 0.0000000 8.0000000 0.0000000 6.5000000 0.0000000 0.0000000 0.0000000 0.0000000 -2.5000000";
-            targetTime = "70000";
-            IContinueToTTime = "0";
-            instant = "0";
       };
       new PathedInterior(MustChange) {
          position = "0 0 0";
@@ -464,6 +462,336 @@ useUltraMarble = "1";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
          baseScale = "1 1 1";
+            initialPosition = "0";
+            initialTargetPosition = "-1";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+            isLooping = "0";
+
+         new Marker() {
+            position = "-20 -22 -24";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "8000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "-20 -22 -24";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "4500";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-20 6 -24";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "3";
+            msToNext = "2000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-20.25 6 -16";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "4";
+            msToNext = "3000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-20 22 -16";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "5";
+            msToNext = "4000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "12 22 -16";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "6";
+            msToNext = "3000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "12 6 -16";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "7";
+            msToNext = "3000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "28 6 -16";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "8";
+            msToNext = "3000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "28 -10 -16";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "9";
+            msToNext = "3000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "12 -10 -16";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "10";
+            msToNext = "4000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "12 -10 0";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "11";
+            msToNext = "3000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-4 -10 0";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "12";
+            msToNext = "3000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-4 -26 8";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "13";
+            msToNext = "4000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "20 -26 8";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "14";
+            msToNext = "2000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "20 -16 8";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "15";
+            msToNext = "8000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "20 -16 25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "16";
+            msToNext = "10000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-27.5 -16 25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "17";
+            msToNext = "2000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-20 -22 -24";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "18";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = $usermods @ "/data/lbinteriors_mbu/advanced/natural_selection.dif";
+         interiorIndex = "0";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            initialPosition = "23500";
+            initialTargetPosition = "-1";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+            isLooping = "0";
+
+         new Marker() {
+            position = "-20 -22 -24";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "8000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "-20 -22 -24";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "4500";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-20 6 -24";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "3";
+            msToNext = "2000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-20.25 6 -16";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "4";
+            msToNext = "3000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-20 22 -16";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "5";
+            msToNext = "4000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "12 22 -16";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "6";
+            msToNext = "3000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "12 6 -16";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "7";
+            msToNext = "3000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "28 6 -16";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "8";
+            msToNext = "3000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "28 -10 -16";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "9";
+            msToNext = "3000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "12 -10 -16";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "10";
+            msToNext = "4000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "12 -10 0";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "11";
+            msToNext = "3000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-4 -10 0";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "12";
+            msToNext = "3000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-4 -26 8";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "13";
+            msToNext = "4000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "20 -26 8";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "14";
+            msToNext = "2000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "20 -16 8";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "15";
+            msToNext = "8000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "20 -16 25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "16";
+            msToNext = "10000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-27.5 -16 25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "17";
+            msToNext = "2000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-20 -22 -24";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "18";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = $usermods @ "/data/lbinteriors_mbu/advanced/natural_selection.dif";
+         interiorIndex = "0";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            initialPosition = "47000";
+            initialTargetPosition = "-1";
       };
    };
    new SimGroup(MustChange_g) {
@@ -476,15 +804,15 @@ useUltraMarble = "1";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
-            msToNext = "3000";
-            smoothingType = "Accelerate";
+            msToNext = "5000";
+            smoothingType = "Linear";
          };
          new Marker() {
-            position = "-11 -12 0";
+            position = "-11 -12 -9.5";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
-            msToNext = "2000";
+            msToNext = "3000";
             smoothingType = "Accelerate";
          };
          new Marker() {
@@ -496,23 +824,21 @@ useUltraMarble = "1";
             smoothingType = "Accelerate";
          };
          new Marker() {
-            position = "-11 -12 -9.5";
+            position = "-11 -12 0";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "4";
+            msToNext = "2000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-11 -12 -9.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "5";
             msToNext = "1000";
             smoothingType = "Linear";
          };
-      };
-      new Trigger(MustChange) {
-         position = "-11 -12 -8.25";
-         rotation = "1 0 0 0";
-         scale = "1 1 1";
-         dataBlock = "TriggerGotoTarget";
-         polyhedron = "-2.0000000 -2.0000000 1.2500000 0.0000000 4.0000000 0.0000000 4.0000000 0.0000000 0.0000000 0.0000000 0.0000000 -2.5000000";
-            targetTime = "3000";
-            IContinueToTTime = "0";
-            instant = "0";
       };
       new PathedInterior(MustChange) {
          position = "0 0 0";
@@ -524,6 +850,8 @@ useUltraMarble = "1";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
          baseScale = "1 1 1";
+            initialPosition = "0";
+            initialTargetPosition = "-1";
       };
    };
    new SimGroup(MustChange_g) {

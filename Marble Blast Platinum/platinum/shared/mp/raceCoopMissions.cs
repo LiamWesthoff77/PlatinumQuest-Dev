@@ -25,16 +25,19 @@ $RaceCoop::BaseDirectory = "platinum/data/multiplayer/race";
 $RaceCoop::AddedFlag     = false; // guards against double-injection
 
 // modId TAB display name TAB space-separated difficulty folder suffixes
-$RaceCoop::Games[0] = "gold"     TAB "Race (Gold)"     TAB "beginner intermediate advanced";
-$RaceCoop::Games[1] = "platinum" TAB "Race (Platinum)" TAB "beginner intermediate advanced expert";
-$RaceCoop::Games[2] = "ultra"    TAB "Race (Ultra)"    TAB "beginner intermediate advanced";
-$RaceCoop::Games[3] = "pq"       TAB "Race (PQ)"       TAB "tutorial beginner intermediate advanced expert quota gemmadness";
-$RaceCoop::GameCount = 4;
+$RaceCoop::Games[0] = "gold"      TAB "Race (Gold)"             TAB "beginner intermediate advanced";
+$RaceCoop::Games[1] = "platinum"  TAB "Race (Platinum)"         TAB "beginner intermediate advanced expert";
+$RaceCoop::Games[2] = "ultra"     TAB "Race (Ultra)"            TAB "beginner intermediate advanced";
+$RaceCoop::Games[3] = "pq"        TAB "Race (PQ)"               TAB "tutorial beginner intermediate advanced expert quota gemmadness";
+$RaceCoop::Games[4] = "removed"   TAB "Race (Removed Levels)"   TAB "all";
+$RaceCoop::Games[5] = "directors" TAB "Race (Director's Edits)" TAB "all";
+$RaceCoop::GameCount = 6;
 
 // Difficulty folder ids don't always turn into a clean label via
 // upperFirst() alone (e.g. "gemmadness" -> "Gemmadness", not "Gem Madness") -
 // override those here, everything else still falls back to upperFirst()
 $RaceCoop::DifficultyDisplay["gemmadness"] = "Gem Madness";
+$RaceCoop::DifficultyDisplay["all"]        = "All Levels";
 
 package RaceCoopMissions {
 

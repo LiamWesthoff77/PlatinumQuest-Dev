@@ -3,17 +3,17 @@
 new SimGroup(MissionGroup) {
 
    new ScriptObject(MissionInfo) {
-         gameMode = "race";
-         game = "Platinum";
+         artist = "Cardcaddy and Matan";
          desc = "If one may fall or go to the sides, but not too far, the teleporter shall put him back to the start.";
-         name = "Cardcaddy\'s Diamond Collection";
-         startHelpText = "Up and down all night long!";
+         game = "Platinum";
+         gameMode = "race";
+         goldTime = "135000";
          level = "15";
          music = "Grudge.ogg";
+         name = "Cardcaddy\'s Diamond Collection";
+         startHelpText = "Up and down all night long!";
          type = "Expert";
-         artist = "Cardcaddy and Matan";
-         goldTime = "135000";
-         UltimateTime = "80000";
+         ultimateTime = "80000";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
@@ -25,6 +25,7 @@ new SimGroup(MissionGroup) {
       position = "336 136 0";
       rotation = "1 0 0 0";
       scale = "1 1 1";
+      materialList = "~/data/skies/Expert/Expert_Sky.dml";
       cloudHeightPer[0] = "0";
       cloudHeightPer[1] = "0";
       cloudHeightPer[2] = "0";
@@ -32,32 +33,35 @@ new SimGroup(MissionGroup) {
       cloudSpeed2 = "0.0002";
       cloudSpeed3 = "0.0003";
       visibleDistance = "500";
-      useSkyTextures = "1";
-      renderBottomTexture = "1";
-      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
       fogDistance = "300";
-      fogColor = "0.600000 0.600000 0.600000 1.000000";
-      fogVolume1 = "-1 7.45949e-031 1.3684e-038";
-      fogVolume2 = "-1 1.07208e-014 8.756e-014";
-      fogVolume3 = "-1 5.1012e-010 2.05098e-008";
-      materialList = "~/data/skies/Expert/Expert_Sky.dml";
+      fogColor = "0.6 0.6 0.6 1";
+      fogStorm1 = "0";
+      fogStorm2 = "0";
+      fogStorm3 = "0";
+      fogVolume1 = "-1 7.45949e-31 1.3684e-38";
+      fogVolume2 = "-1 1.07208e-14 8.756e-14";
+      fogVolume3 = "-1 5.1012e-10 2.05098e-08";
+      fogVolumeColor1 = "128 128 128 0";
+      fogVolumeColor2 = "128 128 128 4e-06";
+      fogVolumeColor3 = "128 128 128 1.44355e+07";
       windVelocity = "1 0 0";
       windEffectPrecipitation = "0";
+      SkySolidColor = "0.6 0.6 0.6 1";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
       noRenderBans = "1";
-      fogVolumeColor1 = "128.000000 128.000000 128.000000 0.000000";
-      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000004";
-      fogVolumeColor3 = "128.000000 128.000000 128.000000 14435505.000000";
    };
    new Sun() {
       direction = "0.638261 0.459006 -0.61801";
-      color = "0.700000 0.700000 0.700000 1.000000";
-      ambient = "0.100000 0.100000 0.200000 1.000000";
+      color = "0.7 0.7 0.7 1";
+      ambient = "0.1 0.1 0.2 1";
    };
    new InteriorInstance() {
       position = "0 0 0";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       interiorFile = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+      useGLLighting = "0";
       showTerrainInside = "0";
    };
    new StaticShape(StartPoint) {
@@ -77,54 +81,60 @@ new SimGroup(MissionGroup) {
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25286";
    };
    new Item() {
       position = "8.25625 0 88.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25289";
    };
    new Item() {
       position = "17.8563 0 93.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25292";
    };
    new Item() {
       position = "27.4562 0 85.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25295";
    };
    new Item() {
       position = "37.0625 0 86.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25298";
    };
    new Item() {
       position = "46.6563 0 97.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "TimeTravelItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         skin = "base";
          timeBonus = "12500";
    };
    new Item() {
@@ -132,7 +142,7 @@ new SimGroup(MissionGroup) {
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "HelicopterItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
    };
@@ -141,126 +151,140 @@ new SimGroup(MissionGroup) {
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25303";
    };
    new Item() {
       position = "22.7563 8.8 84.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25306";
    };
    new Item() {
       position = "13.1563 8.8 86.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25309";
    };
    new Item() {
       position = "3.55625 8.8 89.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25312";
    };
    new Item() {
       position = "-1.34375 18.4063 87.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25315";
    };
    new Item() {
       position = "8.25 18.4063 83.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25318";
    };
    new Item() {
       position = "17.8563 18.4 81.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25321";
    };
    new Item() {
       position = "27.4562 18.4 82.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25324";
    };
    new Item() {
       position = "37.0563 18.4 85.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25327";
    };
    new Item() {
       position = "46.6563 18.4063 83.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25330";
    };
    new Item() {
       position = "41.9688 27.1875 80.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25333";
    };
    new Item() {
       position = "32.3563 27.2 80.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25336";
    };
    new Item() {
       position = "22.75 27.1875 79.7562";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25339";
    };
    new Item() {
       position = "13.1563 27.1875 91.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "TimeTravelItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         skin = "base";
          timeBonus = "12500";
    };
    new Item() {
@@ -268,7 +292,7 @@ new SimGroup(MissionGroup) {
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "SuperJumpItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
    };
@@ -277,7 +301,7 @@ new SimGroup(MissionGroup) {
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "HelicopterItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
    };
@@ -286,36 +310,40 @@ new SimGroup(MissionGroup) {
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25345";
    };
    new Item() {
       position = "17.8563 36.8 81.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25348";
    };
    new Item() {
       position = "27.4562 36.8 81.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25351";
    };
    new Item() {
       position = "37.0625 36.8125 85.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "TimeTravelItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         skin = "base";
          timeBonus = "12500";
    };
    new Item() {
@@ -323,25 +351,27 @@ new SimGroup(MissionGroup) {
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25355";
    };
    new Item() {
       position = "41.9562 45.6 81.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25358";
    };
    new Item() {
       position = "32.3438 45.5938 80.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "SuperJumpItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
    };
@@ -350,81 +380,90 @@ new SimGroup(MissionGroup) {
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25362";
    };
    new Item() {
       position = "13.1563 45.5938 82.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25365";
    };
    new Item() {
       position = "3.55625 45.6 81.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25368";
    };
    new Item() {
       position = "-1.34375 55.1875 83.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25371";
    };
    new Item() {
       position = "8.25625 55.2 83.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25374";
    };
    new Item() {
       position = "17.8563 55.2 88.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25377";
    };
    new Item() {
       position = "27.4562 55.2 84.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25380";
    };
    new Item() {
       position = "37.0563 55.2 81.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25383";
    };
    new Item() {
       position = "46.6563 55.1875 84.6563";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "GemItem";
-      collideable = "0";
+      collidable = "0";
       static = "1";
       rotate = "1";
+         StaticGem = "25386";
    };
    new StaticShape() {
       position = "22.75 64 83.6563";
@@ -436,20 +475,22 @@ new SimGroup(MissionGroup) {
       position = "-18.3438 55.5 100.988";
       rotation = "1 0 0 0";
       scale = "1 1 1";
-      dataBlock = "EasterEgg";
-      collideable = "0";
+      dataBlock = "easterEgg";
+      collidable = "0";
       static = "1";
       rotate = "1";
    };
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "-1.34375 0 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "1424";
             smoothingType = "Accelerate";
          };
@@ -458,6 +499,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "846";
             smoothingType = "Accelerate";
          };
@@ -466,6 +508,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -475,7 +518,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "0";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -486,12 +529,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "8.25625 0 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "952";
             smoothingType = "Accelerate";
          };
@@ -500,6 +545,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "892";
             smoothingType = "Accelerate";
          };
@@ -508,6 +554,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -517,7 +564,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "1";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -528,12 +575,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "17.8563 0 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "1400";
             smoothingType = "Accelerate";
          };
@@ -542,6 +591,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "600";
             smoothingType = "Accelerate";
          };
@@ -550,6 +600,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -559,7 +610,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "2";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -570,12 +621,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "27.4562 0 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -584,6 +637,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "1300";
             smoothingType = "Accelerate";
          };
@@ -592,6 +646,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -601,7 +656,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "3";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -612,12 +667,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "37.0563 0 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "923";
             smoothingType = "Accelerate";
          };
@@ -626,6 +683,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "711";
             smoothingType = "Accelerate";
          };
@@ -634,6 +692,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -643,7 +702,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "4";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -654,12 +713,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "46.6563 0 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "535";
             smoothingType = "Accelerate";
          };
@@ -668,6 +729,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "633";
             smoothingType = "Accelerate";
          };
@@ -676,6 +738,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -685,7 +748,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "5";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -696,12 +759,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "3.55625 8.8 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "754";
             smoothingType = "Accelerate";
          };
@@ -710,6 +775,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "848";
             smoothingType = "Accelerate";
          };
@@ -718,6 +784,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -727,7 +794,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "6";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -738,12 +805,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "13.1563 8.8 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "1284";
             smoothingType = "Accelerate";
          };
@@ -752,6 +821,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "747";
             smoothingType = "Accelerate";
          };
@@ -760,6 +830,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -769,7 +840,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "7";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -780,12 +851,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "22.7563 8.8 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "932";
             smoothingType = "Accelerate";
          };
@@ -794,6 +867,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "736";
             smoothingType = "Accelerate";
          };
@@ -802,6 +876,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -811,7 +886,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "8";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -822,12 +897,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "32.3563 8.8 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "1032";
             smoothingType = "Accelerate";
          };
@@ -836,6 +913,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "746";
             smoothingType = "Accelerate";
          };
@@ -844,6 +922,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -853,7 +932,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "9";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -864,12 +943,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "41.9562 8.8 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "655";
             smoothingType = "Accelerate";
          };
@@ -878,6 +959,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "976";
             smoothingType = "Accelerate";
          };
@@ -886,6 +968,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -895,7 +978,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "10";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -906,12 +989,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "-1.34375 18.4 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "835";
             smoothingType = "Accelerate";
          };
@@ -920,6 +1005,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "547";
             smoothingType = "Accelerate";
          };
@@ -928,6 +1014,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -937,7 +1024,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "11";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -948,12 +1035,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "8.25625 18.4 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "1284";
             smoothingType = "Accelerate";
          };
@@ -962,6 +1051,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "364";
             smoothingType = "Accelerate";
          };
@@ -970,6 +1060,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -979,7 +1070,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "12";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -990,12 +1081,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "17.8563 18.4 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "800";
             smoothingType = "Accelerate";
          };
@@ -1004,6 +1097,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "1500";
             smoothingType = "Accelerate";
          };
@@ -1012,6 +1106,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1021,7 +1116,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "13";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1032,12 +1127,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "27.4562 18.4 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "1164";
             smoothingType = "Accelerate";
          };
@@ -1046,6 +1143,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "745";
             smoothingType = "Accelerate";
          };
@@ -1054,6 +1152,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1063,7 +1162,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "14";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1074,12 +1173,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "37.0563 18.4 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "643";
             smoothingType = "Accelerate";
          };
@@ -1088,6 +1189,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "834";
             smoothingType = "Accelerate";
          };
@@ -1096,6 +1198,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1105,7 +1208,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "15";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1116,12 +1219,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "46.6563 18.4 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "848";
             smoothingType = "Accelerate";
          };
@@ -1130,6 +1235,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "234";
             smoothingType = "Accelerate";
          };
@@ -1138,6 +1244,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1147,7 +1254,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "16";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1158,12 +1265,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "3.55625 27.2 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "1343";
             smoothingType = "Accelerate";
          };
@@ -1172,6 +1281,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "150";
             smoothingType = "Accelerate";
          };
@@ -1180,6 +1290,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1189,7 +1300,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "17";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1200,12 +1311,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "13.1563 27.2 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "574";
             smoothingType = "Accelerate";
          };
@@ -1214,6 +1327,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "475";
             smoothingType = "Accelerate";
          };
@@ -1222,6 +1336,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1231,7 +1346,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "18";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1242,12 +1357,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "22.7563 27.2 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "1420";
             smoothingType = "Accelerate";
          };
@@ -1256,6 +1373,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "1420";
             smoothingType = "Accelerate";
          };
@@ -1264,6 +1382,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1273,7 +1392,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "19";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1284,12 +1403,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "32.3563 27.2 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "924";
             smoothingType = "Accelerate";
          };
@@ -1298,6 +1419,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "784";
             smoothingType = "Accelerate";
          };
@@ -1306,6 +1428,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1315,7 +1438,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "20";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1326,12 +1449,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "41.9562 27.2 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "822";
             smoothingType = "Accelerate";
          };
@@ -1340,6 +1465,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "938";
             smoothingType = "Accelerate";
          };
@@ -1348,6 +1474,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1357,7 +1484,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "21";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1368,12 +1495,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "-1.34375 36.8 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "634";
             smoothingType = "Accelerate";
          };
@@ -1382,6 +1511,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "235";
             smoothingType = "Accelerate";
          };
@@ -1390,6 +1520,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1399,7 +1530,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "22";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1410,12 +1541,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "8.25625 36.8 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "827";
             smoothingType = "Accelerate";
          };
@@ -1424,6 +1557,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "342";
             smoothingType = "Accelerate";
          };
@@ -1432,6 +1566,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1441,7 +1576,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "23";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1452,12 +1587,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "17.8563 36.8 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "1964";
             smoothingType = "Accelerate";
          };
@@ -1466,6 +1603,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "1843";
             smoothingType = "Accelerate";
          };
@@ -1474,6 +1612,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1483,7 +1622,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "24";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1494,12 +1633,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "27.4562 36.8 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "700";
             smoothingType = "Accelerate";
          };
@@ -1508,6 +1649,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "2000";
             smoothingType = "Accelerate";
          };
@@ -1516,6 +1658,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1525,7 +1668,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "25";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1536,12 +1679,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "37.0563 36.8 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "1134";
             smoothingType = "Accelerate";
          };
@@ -1550,6 +1695,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "424";
             smoothingType = "Accelerate";
          };
@@ -1558,6 +1704,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1567,7 +1714,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "26";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1578,12 +1725,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "46.6563 36.8 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "666";
             smoothingType = "Accelerate";
          };
@@ -1592,6 +1741,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "666";
             smoothingType = "Accelerate";
          };
@@ -1600,6 +1750,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1609,7 +1760,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "27";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1620,12 +1771,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "3.55625 45.6 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "1042";
             smoothingType = "Accelerate";
          };
@@ -1634,6 +1787,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "1332";
             smoothingType = "Accelerate";
          };
@@ -1642,6 +1796,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1651,7 +1806,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "28";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1662,12 +1817,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "13.1563 45.6 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "1242";
             smoothingType = "Accelerate";
          };
@@ -1676,6 +1833,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "783";
             smoothingType = "Accelerate";
          };
@@ -1684,6 +1842,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1693,7 +1852,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "29";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1704,12 +1863,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "22.7563 45.6 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "446";
             smoothingType = "Accelerate";
          };
@@ -1718,6 +1879,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "242";
             smoothingType = "Accelerate";
          };
@@ -1726,6 +1888,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1735,7 +1898,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "30";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1746,12 +1909,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "32.3563 45.6 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "637";
             smoothingType = "Accelerate";
          };
@@ -1760,6 +1925,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "1424";
             smoothingType = "Accelerate";
          };
@@ -1768,6 +1934,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1777,7 +1944,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "31";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1788,12 +1955,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "41.9562 45.6 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "835";
             smoothingType = "Accelerate";
          };
@@ -1802,6 +1971,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "457";
             smoothingType = "Accelerate";
          };
@@ -1810,6 +1980,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1819,7 +1990,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "32";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1830,12 +2001,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "-1.34375 55.2 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "744";
             smoothingType = "Accelerate";
          };
@@ -1844,6 +2017,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "974";
             smoothingType = "Accelerate";
          };
@@ -1852,6 +2026,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1861,7 +2036,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "33";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1872,12 +2047,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "8.25625 55.2 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "934";
             smoothingType = "Accelerate";
          };
@@ -1886,6 +2063,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "846";
             smoothingType = "Accelerate";
          };
@@ -1894,6 +2072,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1903,7 +2082,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "34";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1914,12 +2093,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "17.8563 55.2 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "743";
             smoothingType = "Accelerate";
          };
@@ -1928,6 +2109,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "774";
             smoothingType = "Accelerate";
          };
@@ -1936,6 +2118,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1945,7 +2128,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "35";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1956,12 +2139,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "27.4562 55.2 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "836";
             smoothingType = "Accelerate";
          };
@@ -1970,6 +2155,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "400";
             smoothingType = "Accelerate";
          };
@@ -1978,6 +2164,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -1987,7 +2174,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "36";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -1998,12 +2185,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "37.0563 55.2 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "1342";
             smoothingType = "Accelerate";
          };
@@ -2012,6 +2201,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "1245";
             smoothingType = "Accelerate";
          };
@@ -2020,6 +2210,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -2029,7 +2220,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "37";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -2040,12 +2231,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "46.6563 55.2 68.6563";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "746";
             smoothingType = "Accelerate";
          };
@@ -2054,6 +2247,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "746";
             smoothingType = "Accelerate";
          };
@@ -2062,6 +2256,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -2071,7 +2266,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "38";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -2082,12 +2277,14 @@ new SimGroup(MissionGroup) {
    new SimGroup(MustChange_g) {
 
       new Path() {
+         isLooping = "0";
 
          new Marker() {
             position = "22.75 27.1875 79.7562";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "0";
+            type = "Normal";
             msToNext = "3000";
             smoothingType = "Accelerate";
          };
@@ -2096,6 +2293,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
+            type = "Normal";
             msToNext = "3000";
             smoothingType = "Accelerate";
          };
@@ -2104,6 +2302,7 @@ new SimGroup(MissionGroup) {
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
             msToNext = "1000";
             smoothingType = "Accelerate";
          };
@@ -2113,7 +2312,7 @@ new SimGroup(MissionGroup) {
          rotation = "1 0 0 0";
          scale = "1 1 1";
          dataBlock = "PathedDefault";
-         interiorResource = $usermods @ "/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
+         interiorResource = "~/data/lbinteriors_mbp/Cardcaddy\'sDiamondCollection.dif";
          interiorIndex = "39";
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
@@ -2121,7 +2320,7 @@ new SimGroup(MissionGroup) {
             initialTargetPosition = "-1";
       };
    };
-   new Trigger(stayhere) {
+   new Trigger(StayHere) {
       position = "-350 350 -1250";
       rotation = "1 0 0 0";
       scale = "700 700 2500";
@@ -2134,19 +2333,400 @@ new SimGroup(MissionGroup) {
       scale = "1000 1000 1000";
       dataBlock = "TeleportTrigger";
       polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         centerDestPoint = "1";
+         delay = "10";
          destination = "Start";
+         DisplayGemsMessage = "0";
+         inverseVelocity = "0";
+         keepAngular = "0";
+         keepCamera = "0";
+         keepVelocity = "0";
+         silent = "0";
    };
-   new Trigger(Start) {
+   new Trigger(start) {
       position = "22.8 -5 80";
       rotation = "1 0 0 0";
       scale = "1 1 1";
       dataBlock = "DestinationTrigger";
       polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
    };
-   new AudioProfile(MusicProfile) {
-      fileName = "~/data/sound/Astrolabe.ogg";
-      description = "AudioMusic";
-      preload = "0";
+   new SimGroup(PathNodeGroup) {
+
+      new StaticShape(CameraPath1) {
+         position = "131.376 29.4063 79.5316";
+         rotation = "0.256256 0.256257 -0.932022 94.0304";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            bezier = "0";
+            branchNodes = " ";
+            delay = "0";
+            FinalRotOffset = "0 0 0";
+            nextNode = "CameraPath2";
+            placed = "1";
+            reverseRotation = "0";
+            RotationMultiplier = "1";
+            smooth = "0";
+            SmoothEnd = "0";
+            SmoothStart = "0";
+            speed = "0";
+            Spline = "0";
+            timeToNext = "4000";
+            usePosition = "1";
+            useRotation = "1";
+            useScale = "1";
+      };
+      new StaticShape(CameraPath2) {
+         position = "123.169 72.4823 79.5316";
+         rotation = "0.174424 0.261046 -0.949437 115.219";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            bezier = "0";
+            branchNodes = " ";
+            delay = "0";
+            FinalRotOffset = "0 0 0";
+            nextNode = "CameraPath3";
+            placed = "1";
+            reverseRotation = "0";
+            RotationMultiplier = "1";
+            smooth = "0";
+            SmoothEnd = "0";
+            SmoothStart = "0";
+            speed = "0";
+            Spline = "0";
+            timeToNext = "4000";
+            usePosition = "1";
+            useRotation = "1";
+            useScale = "1";
+      };
+      new StaticShape(CameraPath3) {
+         position = "99.7978 109 79.5316";
+         rotation = "-0.109156 -0.263525 0.958457 223.307";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            bezier = "0";
+            branchNodes = " ";
+            delay = "0";
+            FinalRotOffset = "0 0 0";
+            nextNode = "CameraPath4";
+            placed = "1";
+            reverseRotation = "0";
+            RotationMultiplier = "1";
+            smooth = "0";
+            SmoothEnd = "0";
+            SmoothStart = "0";
+            speed = "0";
+            Spline = "0";
+            timeToNext = "4000";
+            usePosition = "1";
+            useRotation = "1";
+            useScale = "1";
+      };
+      new StaticShape(CameraPath4) {
+         position = "64.8205 133.401 79.5316";
+         rotation = "-0.0526609 -0.264742 0.96288 201.685";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            bezier = "0";
+            branchNodes = " ";
+            delay = "0";
+            FinalRotOffset = "0 0 0";
+            nextNode = "CameraPath5";
+            placed = "1";
+            reverseRotation = "0";
+            RotationMultiplier = "1";
+            smooth = "0";
+            SmoothEnd = "0";
+            SmoothStart = "0";
+            speed = "0";
+            Spline = "0";
+            timeToNext = "4000";
+            usePosition = "1";
+            useRotation = "1";
+            useScale = "1";
+      };
+      new StaticShape(CameraPath5) {
+         position = "23.5621 141.969 79.5316";
+         rotation = "-3.3605e-07 -0.265109 0.964218 180";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            bezier = "0";
+            branchNodes = " ";
+            delay = "0";
+            FinalRotOffset = "0 0 0";
+            nextNode = "CameraPath6";
+            placed = "1";
+            reverseRotation = "0";
+            RotationMultiplier = "1";
+            smooth = "0";
+            SmoothEnd = "0";
+            SmoothStart = "0";
+            speed = "0";
+            Spline = "0";
+            timeToNext = "4000";
+            usePosition = "1";
+            useRotation = "1";
+            useScale = "1";
+      };
+      new StaticShape(CameraPath6) {
+         position = "-17.6962 133.401 79.5316";
+         rotation = "0.0526602 -0.264742 0.96288 158.315";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            bezier = "0";
+            branchNodes = " ";
+            delay = "0";
+            FinalRotOffset = "0 0 0";
+            nextNode = "CameraPath7";
+            placed = "1";
+            reverseRotation = "0";
+            RotationMultiplier = "1";
+            smooth = "0";
+            SmoothEnd = "0";
+            SmoothStart = "0";
+            speed = "0";
+            Spline = "0";
+            timeToNext = "4000";
+            usePosition = "1";
+            useRotation = "1";
+            useScale = "1";
+      };
+      new StaticShape(CameraPath7) {
+         position = "-52.6725 109.001 79.5316";
+         rotation = "0.109156 -0.263525 0.958457 136.693";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            bezier = "0";
+            branchNodes = " ";
+            delay = "0";
+            FinalRotOffset = "0 0 0";
+            nextNode = "CameraPath8";
+            placed = "1";
+            reverseRotation = "0";
+            RotationMultiplier = "1";
+            smooth = "0";
+            SmoothEnd = "0";
+            SmoothStart = "0";
+            speed = "0";
+            Spline = "0";
+            timeToNext = "4000";
+            usePosition = "1";
+            useRotation = "1";
+            useScale = "1";
+      };
+      new StaticShape(CameraPath8) {
+         position = "-76.0436 72.4827 79.5316";
+         rotation = "0.174425 -0.261046 0.949437 115.218";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            bezier = "0";
+            branchNodes = " ";
+            delay = "0";
+            FinalRotOffset = "0 0 0";
+            nextNode = "CameraPath9";
+            placed = "1";
+            reverseRotation = "0";
+            RotationMultiplier = "1";
+            smooth = "0";
+            SmoothEnd = "0";
+            SmoothStart = "0";
+            speed = "0";
+            Spline = "0";
+            timeToNext = "4000";
+            usePosition = "1";
+            useRotation = "1";
+            useScale = "1";
+      };
+      new StaticShape(CameraPath9) {
+         position = "-84.2505 29.4066 79.5316";
+         rotation = "0.256257 -0.256257 0.932022 94.0304";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            bezier = "0";
+            branchNodes = " ";
+            delay = "0";
+            FinalRotOffset = "0 0 0";
+            nextNode = "CameraPath10";
+            placed = "1";
+            reverseRotation = "0";
+            RotationMultiplier = "1";
+            smooth = "0";
+            SmoothEnd = "0";
+            SmoothStart = "0";
+            speed = "0";
+            Spline = "0";
+            timeToNext = "4000";
+            usePosition = "1";
+            useRotation = "1";
+            useScale = "1";
+      };
+      new StaticShape(CameraPath10) {
+         position = "-76.0438 -13.6695 79.5316";
+         rotation = "0.368797 -0.246422 0.89625 73.4108";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            bezier = "0";
+            branchNodes = " ";
+            delay = "0";
+            FinalRotOffset = "0 0 0";
+            nextNode = "CameraPath11";
+            placed = "1";
+            reverseRotation = "0";
+            RotationMultiplier = "1";
+            smooth = "0";
+            SmoothEnd = "0";
+            SmoothStart = "0";
+            speed = "0";
+            Spline = "0";
+            timeToNext = "4000";
+            usePosition = "1";
+            useRotation = "1";
+            useScale = "1";
+      };
+      new StaticShape(CameraPath11) {
+         position = "-52.6729 -50.1877 79.5316";
+         rotation = "0.539074 -0.223291 0.812121 54.0465";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            bezier = "0";
+            branchNodes = " ";
+            delay = "0";
+            FinalRotOffset = "0 0 0";
+            nextNode = "CameraPath12";
+            placed = "1";
+            reverseRotation = "0";
+            RotationMultiplier = "1";
+            smooth = "0";
+            SmoothEnd = "0";
+            SmoothStart = "0";
+            speed = "0";
+            Spline = "0";
+            timeToNext = "4000";
+            usePosition = "1";
+            useRotation = "1";
+            useScale = "1";
+      };
+      new StaticShape(CameraPath12) {
+         position = "-17.6957 -74.5884 79.5316";
+         rotation = "0.799887 -0.159106 0.578677 37.9392";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            bezier = "0";
+            branchNodes = " ";
+            delay = "0";
+            FinalRotOffset = "0 0 0";
+            nextNode = "CameraPath13";
+            placed = "1";
+            reverseRotation = "0";
+            RotationMultiplier = "1";
+            smooth = "0";
+            SmoothEnd = "0";
+            SmoothStart = "0";
+            speed = "0";
+            Spline = "0";
+            timeToNext = "4000";
+            usePosition = "1";
+            useRotation = "1";
+            useScale = "1";
+      };
+      new StaticShape(CameraPath13) {
+         position = "23.5626 -83.1567 79.5316";
+         rotation = "1 2.23319e-06 -8.12224e-06 30.7469";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            bezier = "0";
+            branchNodes = " ";
+            delay = "0";
+            FinalRotOffset = "0 0 0";
+            nextNode = "CameraPath14";
+            placed = "1";
+            reverseRotation = "0";
+            RotationMultiplier = "1";
+            smooth = "0";
+            SmoothEnd = "0";
+            SmoothStart = "0";
+            speed = "0";
+            Spline = "0";
+            timeToNext = "4000";
+            usePosition = "1";
+            useRotation = "1";
+            useScale = "1";
+      };
+      new StaticShape(CameraPath14) {
+         position = "64.821 -74.5883 79.5316";
+         rotation = "0.799887 0.159106 -0.578676 37.9391";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            bezier = "0";
+            branchNodes = " ";
+            delay = "0";
+            FinalRotOffset = "0 0 0";
+            nextNode = "CameraPath15";
+            placed = "1";
+            reverseRotation = "0";
+            RotationMultiplier = "1";
+            smooth = "0";
+            SmoothEnd = "0";
+            SmoothStart = "0";
+            speed = "0";
+            Spline = "0";
+            timeToNext = "4000";
+            usePosition = "1";
+            useRotation = "1";
+            useScale = "1";
+      };
+      new StaticShape(CameraPath15) {
+         position = "99.798 -50.1875 79.5316";
+         rotation = "0.539074 0.223291 -0.812121 54.0465";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            bezier = "0";
+            branchNodes = " ";
+            delay = "0";
+            FinalRotOffset = "0 0 0";
+            nextNode = "CameraPath16";
+            placed = "1";
+            reverseRotation = "0";
+            RotationMultiplier = "1";
+            smooth = "0";
+            SmoothEnd = "0";
+            SmoothStart = "0";
+            speed = "0";
+            Spline = "0";
+            timeToNext = "4000";
+            usePosition = "1";
+            useRotation = "1";
+            useScale = "1";
+      };
+      new StaticShape(CameraPath16) {
+         position = "123.169 -13.6693 79.5316";
+         rotation = "0.368797 0.246422 -0.89625 73.4108";
+         scale = "1 1 1";
+         dataBlock = "PathNode";
+            bezier = "0";
+            branchNodes = " ";
+            delay = "0";
+            FinalRotOffset = "0 0 0";
+            nextNode = "CameraPath1";
+            placed = "1";
+            reverseRotation = "0";
+            RotationMultiplier = "1";
+            smooth = "0";
+            SmoothEnd = "0";
+            SmoothStart = "0";
+            speed = "0";
+            Spline = "0";
+            timeToNext = "4000";
+            usePosition = "1";
+            useRotation = "1";
+            useScale = "1";
+      };
+   };
+   new TSStatic() {
+      position = "10.3476 23.6464 -4.27118";
+      rotation = "1 0 0 0";
+      scale = "200 200 1";
+      shapeName = "~/data/shapes/colmesh.dts";
+      computeConvexHulls = "0";
    };
 };
 //--- OBJECT WRITE END ---
