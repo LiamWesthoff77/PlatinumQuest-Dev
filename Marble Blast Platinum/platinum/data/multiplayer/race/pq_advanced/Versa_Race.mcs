@@ -20,7 +20,6 @@ new ScriptObject() {
 		awesomeHint = "Your priority in Vice is to get to the cannons. Versa itself offers a couple shortcuts to skip the island you start on. You will need to use the PhysMod to grab a Time Travel, and then use a trick learned in Vice to help you do a quick skip. Oh, and the Shock Absorber will come into play... you did get it in Vice, didn't you?";
 		eggHint = "... perhaps you\'re missing a button?";
 		CustomRadarRule = $Radar::Flags::TimeTravels | $Radar::Flags::EndPad;
-		displayFunc = "display_Versa";
 		easterEgg = "1";
 		gems = "0";
 		interior0 = $usermods @ "/data/interiors_pq/advanced/ViceVersa.dif";
@@ -28,7 +27,6 @@ new ScriptObject() {
 		interiors = "2";
 		maxScore = "0";
 		requirements = "Finish Vice and save a run.";
-		unlockFunc = "unlock_Versa";
 		versa = "1";
 		trivia = "\nI then revisited with new-found inspiration from another game called Supaplex, which had a couple of levels called Vice and Versa... you can tell what they were on about\n\nAnyhow with Phil also telling me that all my levels are basically flat-ground and no differences in height (he wasn\'t wrong), I had all the motivation required to start anew.\nThe fading in/out platforms? Inspired from the Mega Man series.\nThe remaining challenges? Two pages worth of A4 paper with sketches and scribbles set out throughout a week of deep thought.\nFinal design took roughly a month or so.\nThe time twist in Versa? me being evil as usual.";
 };

@@ -27,7 +27,6 @@ new ScriptObject() {
 		postFxShaderF = $usermods @ "/data/shaders/miscalculationF.glsl";
 		requirements = "Finish Diminishing Returns and 60% of all Expert levels.";
 		trivia = "This level was started with grander scenery at the time, but died as realistic water was not possible at the end.\n The level started as a request from Matan to code a fade platform that would slowly disappear and only when the marble touched it.";
-		unlockFunc = "unlock_Miscalculation";
 };
 }
 //--- INFO END ---

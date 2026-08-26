@@ -400,16 +400,16 @@ new SimGroup(MissionGroup) {
             scale = "1 1 1";
             seqNum = "0";
             type = "Normal";
-            msToNext = "8000";
-            smoothingType = "Accelerate";
+            msToNext = "2000";
+            smoothingType = "Linear";
          };
          new Marker() {
-            position = "2 30 6.75";
+            position = "2 8 6.75";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
             type = "Normal";
-            msToNext = "3000";
+            msToNext = "8000";
             smoothingType = "Accelerate";
          };
          new Marker() {
@@ -418,25 +418,43 @@ new SimGroup(MissionGroup) {
             scale = "1 1 1";
             seqNum = "2";
             type = "Normal";
-            msToNext = "3000";
-            smoothingType = "Accelerate";
+            msToNext = "2000";
+            smoothingType = "Linear";
          };
          new Marker() {
-            position = "2 8 6.75";
+            position = "2 30 6.75";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "3";
             type = "Normal";
-            msToNext = "3000";
+            msToNext = "500";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "2 30 5.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "4";
+            type = "Normal";
+            msToNext = "1500";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "2 8 5.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "5";
+            type = "Normal";
+            msToNext = "500";
             smoothingType = "Linear";
          };
          new Marker() {
             position = "2 8 6.75";
             rotation = "1 0 0 0";
             scale = "1 1 1";
-            seqNum = "4";
+            seqNum = "6";
             type = "Normal";
-            msToNext = "2000";
+            msToNext = "0";
             smoothingType = "Linear";
          };
       };
@@ -450,6 +468,90 @@ new SimGroup(MissionGroup) {
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
          baseScale = "1 1 1";
+            initialPosition = "0";
+            initialTargetPosition = "-1";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+         isLooping = "0";
+
+         new Marker() {
+            position = "2 8 6.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            type = "Normal";
+            msToNext = "2000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "2 8 6.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            type = "Normal";
+            msToNext = "8000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "2 30 6.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            type = "Normal";
+            msToNext = "2000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "2 30 6.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "3";
+            type = "Normal";
+            msToNext = "500";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "2 30 5.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "4";
+            type = "Normal";
+            msToNext = "1500";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "2 8 5.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "5";
+            type = "Normal";
+            msToNext = "500";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "2 8 6.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "6";
+            type = "Normal";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "~/data/lbinteriors_mbp/mbp_stamina.dif";
+         interiorIndex = "3";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            initialPosition = "7250";
             initialTargetPosition = "-1";
       };
    };
@@ -464,8 +566,8 @@ new SimGroup(MissionGroup) {
             scale = "1 1 1";
             seqNum = "0";
             type = "Normal";
-            msToNext = "12000";
-            smoothingType = "Accelerate";
+            msToNext = "2000";
+            smoothingType = "Linear";
          };
          new Marker() {
             position = "-2 30 6.75";
@@ -482,8 +584,8 @@ new SimGroup(MissionGroup) {
             scale = "1 1 1";
             seqNum = "2";
             type = "Normal";
-            msToNext = "2000";
-            smoothingType = "Accelerate";
+            msToNext = "1000";
+            smoothingType = "Linear";
          };
          new Marker() {
             position = "-2 66 6.75";
@@ -491,25 +593,34 @@ new SimGroup(MissionGroup) {
             scale = "1 1 1";
             seqNum = "3";
             type = "Normal";
-            msToNext = "3000";
-            smoothingType = "Accelerate";
+            msToNext = "500";
+            smoothingType = "Linear";
          };
          new Marker() {
-            position = "-2 30 6.75";
+            position = "-2 66 5.75";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "4";
             type = "Normal";
-            msToNext = "3000";
+            msToNext = "1500";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-2 30 5.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "5";
+            type = "Normal";
+            msToNext = "500";
             smoothingType = "Linear";
          };
          new Marker() {
             position = "-2 30 6.75";
             rotation = "1 0 0 0";
             scale = "1 1 1";
-            seqNum = "5";
+            seqNum = "6";
             type = "Normal";
-            msToNext = "2500";
+            msToNext = "0";
             smoothingType = "Linear";
          };
       };
@@ -523,6 +634,90 @@ new SimGroup(MissionGroup) {
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
          baseScale = "1 1 1";
+            initialPosition = "4500";
+            initialTargetPosition = "-1";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+         isLooping = "0";
+
+         new Marker() {
+            position = "-2 30 6.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            type = "Normal";
+            msToNext = "2000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "-2 30 6.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            type = "Normal";
+            msToNext = "9000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-2 66 6.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            type = "Normal";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "-2 66 6.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "3";
+            type = "Normal";
+            msToNext = "500";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "-2 66 5.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "4";
+            type = "Normal";
+            msToNext = "1500";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-2 30 5.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "5";
+            type = "Normal";
+            msToNext = "500";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "-2 30 6.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "6";
+            type = "Normal";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "~/data/lbinteriors_mbp/mbp_stamina.dif";
+         interiorIndex = "4";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            initialPosition = "11750";
             initialTargetPosition = "-1";
       };
    };
@@ -629,20 +824,20 @@ new SimGroup(MissionGroup) {
             scale = "1 1 1";
             seqNum = "0";
             type = "Normal";
+            msToNext = "5000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "2 78 5.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            type = "Normal";
             msToNext = "10000";
             smoothingType = "Accelerate";
          };
          new Marker() {
             position = "2 122.25 5.75";
-            rotation = "1 0 0 0";
-            scale = "1 1 1";
-            seqNum = "1";
-            type = "Normal";
-            msToNext = "5000";
-            smoothingType = "Accelerate";
-         };
-         new Marker() {
-            position = "6 122 5.75";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
@@ -651,31 +846,31 @@ new SimGroup(MissionGroup) {
             smoothingType = "Accelerate";
          };
          new Marker() {
-            position = "18 122 4.75";
+            position = "6 122 5.75";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "3";
             type = "Normal";
             msToNext = "5000";
-            smoothingType = "Linear";
+            smoothingType = "Accelerate";
          };
          new Marker() {
-            position = "17.9972 122.001 4.75";
+            position = "18 122 4.75";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "4";
             type = "Normal";
-            msToNext = "0";
+            msToNext = "1000";
             smoothingType = "Linear";
          };
          new Marker() {
-            position = "2 78 5.75";
+            position = "18 122 4.75";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "5";
             type = "Normal";
-            msToNext = "5000";
-            smoothingType = "Linear";
+            msToNext = "8000";
+            smoothingType = "Accelerate";
          };
          new Marker() {
             position = "2 78 5.75";
@@ -683,7 +878,7 @@ new SimGroup(MissionGroup) {
             scale = "1 1 1";
             seqNum = "6";
             type = "Normal";
-            msToNext = "5000";
+            msToNext = "0";
             smoothingType = "Linear";
          };
       };
@@ -697,6 +892,173 @@ new SimGroup(MissionGroup) {
          basePosition = "0 0 0";
          baseRotation = "1 0 0 0";
          baseScale = "1 1 1";
+            initialPosition = "0";
+            initialTargetPosition = "-1";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+         isLooping = "0";
+
+         new Marker() {
+            position = "2 78 5.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            type = "Normal";
+            msToNext = "5000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "2 78 5.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            type = "Normal";
+            msToNext = "10000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "2 122.25 5.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            type = "Normal";
+            msToNext = "5000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "6 122 5.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "3";
+            type = "Normal";
+            msToNext = "5000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "18 122 4.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "4";
+            type = "Normal";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "18 122 4.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "5";
+            type = "Normal";
+            msToNext = "8000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "2 78 5.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "6";
+            type = "Normal";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "~/data/lbinteriors_mbp/mbp_stamina.dif";
+         interiorIndex = "7";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            initialPosition = "11333";
+            initialTargetPosition = "-1";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+         isLooping = "0";
+
+         new Marker() {
+            position = "2 78 5.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            type = "Normal";
+            msToNext = "5000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "2 78 5.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            type = "Normal";
+            msToNext = "10000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "2 122.25 5.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            type = "Normal";
+            msToNext = "5000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "6 122 5.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "3";
+            type = "Normal";
+            msToNext = "5000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "18 122 4.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "4";
+            type = "Normal";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "18 122 4.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "5";
+            type = "Normal";
+            msToNext = "8000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "2 78 5.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "6";
+            type = "Normal";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "~/data/lbinteriors_mbp/mbp_stamina.dif";
+         interiorIndex = "7";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            initialPosition = "22667";
             initialTargetPosition = "-1";
       };
    };
@@ -849,11 +1211,11 @@ new SimGroup(MissionGroup) {
             scale = "1 1 1";
             seqNum = "0";
             type = "Normal";
-            msToNext = "6000";
-            smoothingType = "Accelerate";
+            msToNext = "2000";
+            smoothingType = "Linear";
          };
          new Marker() {
-            position = "18 50 18.25";
+            position = "18 78 18.25";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
@@ -862,10 +1224,28 @@ new SimGroup(MissionGroup) {
             smoothingType = "Accelerate";
          };
          new Marker() {
-            position = "18 78 18.25";
+            position = "18 50 18.25";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "18 50 18.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "3";
+            type = "Normal";
+            msToNext = "1500";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "18 78 18.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "4";
             type = "Normal";
             msToNext = "0";
             smoothingType = "Linear";
@@ -895,11 +1275,11 @@ new SimGroup(MissionGroup) {
             scale = "1 1 1";
             seqNum = "0";
             type = "Normal";
-            msToNext = "5000";
-            smoothingType = "Accelerate";
+            msToNext = "2000";
+            smoothingType = "Linear";
          };
          new Marker() {
-            position = "18 18 20.75";
+            position = "18 42 15.75";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "1";
@@ -908,10 +1288,28 @@ new SimGroup(MissionGroup) {
             smoothingType = "Accelerate";
          };
          new Marker() {
-            position = "18 42 15.75";
+            position = "18 18 20.75";
             rotation = "1 0 0 0";
             scale = "1 1 1";
             seqNum = "2";
+            type = "Normal";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "18 18 20.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "3";
+            type = "Normal";
+            msToNext = "1500";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "18 42 15.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "4";
             type = "Normal";
             msToNext = "0";
             smoothingType = "Linear";

@@ -27,7 +27,6 @@ new ScriptObject() {
 		maxScore = "26";
 		requirements = "Finish 30% of all Beginner levels.";
 		trivia = "This level was inspired by Marble Blast Gold\'s last beginner level, Grand Finale. You can see references to it throughout the design.\nThe level name is a reference to Matan.";
-		unlockFunc = "unlock_FromUnderTheDragonsWing";
 };
 }
 //--- INFO END ---

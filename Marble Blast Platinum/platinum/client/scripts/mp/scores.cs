@@ -830,7 +830,7 @@ function scoreListUpdate() {
 					new GuiMLTextCtrl(PGScoreGems @ %index) {
 						profile = "GuiMLTextProfile";
 						position = "314 3";
-						extent = "60 14";
+						extent = "85 14";
 						visible = "1";
 						lineSpacing = "2";
 						maxChars = "-1";

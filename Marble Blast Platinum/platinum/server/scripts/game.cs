@@ -1202,6 +1202,7 @@ function GameConnection::quickRespawnPlayer(%this) {
 	// So... they want to quick respawn, do they?
 	// They're not getting off *that* easy. No spawn abusing!
 	%this.quickRespawning = true;
+	%this.oobCount++; // Counts the same as falling OOB on the end screen
 	%this.respawnFromOOB();
 	%this.quickRespawning = false;
 

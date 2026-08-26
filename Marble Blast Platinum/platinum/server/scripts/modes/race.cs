@@ -214,6 +214,18 @@ function Mode_race::onMissionReset(%this) {
 	%this.gemMadnessTimeExpired = false;
 }
 function Mode_race::onClientLeaveGame(%this, %object) {
+	//The base GameConnection::onClientLeaveGame already broadcast one last
+	//(stale) score update before this callback ever runs - a disconnecting
+	//client who hadn't finished yet would otherwise sit on everyone else's
+	//standings forever with whatever score/time they happened to have (often
+	//0, sorting them into first place). Mark them DNF and push a corrected
+	//update so they settle to the bottom instead.
+	%client = %object.client;
+	if (isObject(%client) && !%client.raceFinished) {
+		%client.raceDNF = true;
+		updateSingleScore(%client);
+	}
+
 	%count = ClientGroup.getCount();
 	if (%count <= 1) {
 		%winner = %this.getRaceWinner();

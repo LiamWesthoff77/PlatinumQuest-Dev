@@ -56,7 +56,6 @@ new ScriptObject() {
 		maxScore = "5";
 		requirements = "Finish 75% of all official PlatinumQuest levels.";
 		trivia = "This level was actually started by Oaky. Pablo and Andrew attempted to continue it, but got stuck and gave up.\nYears later, the project files were rediscovered by Uil, and the level was in a state of absolute mess -- parts everywhere, nothing completed, faces broken... With a bit of effort, Uil retooled these leftover parts to create a coherent start to the level, and after (slightly disgruntled) approval from Matan, he and Threefolder worked together to extend the level, which would then become PlatinumQuest\'s finale.\n\nThe cannon launch near the end was born out of a disagreement between Threefolder and Uil on how the level should end, as Threefolder didn\'t think the tube would look good with the rest of the level in view. A compromise was reached, and both agree that the change made was for the better.";
-		unlockFunc = "unlock_ManicBounce";
 };
 }
 //--- INFO END ---

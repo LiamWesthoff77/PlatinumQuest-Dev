@@ -23,7 +23,6 @@ new ScriptObject() {
 		maxScore = "0";
 		requirements = "Finish 50% of all Advanced levels.";
 		trivia = "History Lesson:\nThe level\'s basic layout came from a Super Monkey Ball level, and I managed to replicate it.\nTo make it more \'varied\' I added some friction floors, but the level was pretty terrible and flat (consistent with my level design at the time haha)...";
-		unlockFunc = "unlock_Vice";
 		vice = "1";
 		surrogate = $usermods @ "/data/missions_pq/advanced/Versa.mcs";
 };
